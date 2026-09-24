@@ -67,6 +67,10 @@ export const en = {
       title: "Have a requirement? Let’s build the right supply plan.",
       text: "Share your product, volume, destination port and preferred Incoterm. We will come back with a tailored, transparent offer.",
     },
+    whatsapp: {
+      label: "Chat on WhatsApp",
+      message: "Hello VELTRON, I would like to discuss a supply requirement.",
+    },
   },
 
   products: {

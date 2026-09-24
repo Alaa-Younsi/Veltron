@@ -20,10 +20,10 @@ export const NOT_FOUND_COPY: Record<
     text: "La page que vous recherchez a peut-être été déplacée ou n’existe plus.",
     home: "Retour à l’accueil",
   },
-  ar: {
-    title: "الصفحة غير موجودة",
-    heading: "يبدو أن هذه الصفحة قد أبحرت.",
-    text: "ربما نُقلت الصفحة التي تبحث عنها أو لم تعد موجودة.",
-    home: "العودة إلى الرئيسية",
+  zh: {
+    title: "页面未找到",
+    heading: "这个页面已经启航。",
+    text: "您要查找的页面可能已被移动或不再存在。",
+    home: "返回首页",
   },
 };

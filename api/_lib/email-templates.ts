@@ -70,7 +70,11 @@ type NotificationInput = {
   reference: string;
 };
 
-const LOCALE_NAMES: Record<Locale, string> = { en: "English", fr: "French", ar: "Arabic" };
+const LOCALE_NAMES: Record<Locale, string> = {
+  en: "English",
+  fr: "French",
+  zh: "Chinese (Simplified)",
+};
 
 export function notificationSubject({ fields, reference }: NotificationInput): string {
   const who = fields.company || fields.name;
@@ -167,22 +171,21 @@ const AUTOREPLY_COPY: Record<
     signoff: "Cordialement,<br>Service commercial VELTRON",
     ref: "Votre référence",
   },
-  ar: {
-    subject: "تم استلام طلبكم — فيلترون للتجارة العالمية",
-    greeting: (n) => `عزيزي/عزيزتي ${n}،`,
+  zh: {
+    subject: "我们已收到您的询价 — VELTRON Global Trading",
+    greeting: (n) => `${n}，您好：`,
     lines: [
-      "شكرًا لتواصلكم مع شركة فيلترون للتجارة العالمية المحدودة. لقد وصل طلبكم إلى فريق التداول لدينا.",
-      "سيقوم أحد أعضاء فريقنا بمراجعة متطلباتكم والرد عليكم، عادةً خلال يوم عمل واحد.",
-      "لإضافة مواصفات أو مستندات، يكفي الرد على هذه الرسالة.",
+      "感谢您联系 VELTRON Global Trading Limited。您的询价已送达我们的贸易团队。",
+      "我们的团队成员将审阅您的需求并尽快回复，通常在一个工作日内。",
+      "如需补充规格或文件，直接回复此邮件即可。",
     ],
-    signoff: "مع أطيب التحيات،<br>فريق التداول — فيلترون",
-    ref: "رقمكم المرجعي",
+    signoff: "此致<br>VELTRON 贸易团队",
+    ref: "您的参考编号",
   },
 };
 
 export function autoReplyEmail(params: { name: string; locale: Locale; reference: string }) {
   const copy = AUTOREPLY_COPY[params.locale];
-  const dir = params.locale === "ar" ? "rtl" : "ltr";
   const body = `
 <p style="margin:0 0 18px;font-size:16px;">${escapeHtml(copy.greeting(params.name))}</p>
 ${copy.lines.map((l) => `<p style="margin:0 0 14px;font-size:15px;line-height:1.7;">${escapeHtml(l)}</p>`).join("")}
@@ -201,7 +204,7 @@ ${copy.lines.map((l) => `<p style="margin:0 0 14px;font-size:15px;line-height:1.
   ].join("\n");
   return {
     subject: copy.subject,
-    html: layout({ dir, preheader: copy.lines[0] ?? "", body, footer }),
+    html: layout({ dir: "ltr", preheader: copy.lines[0] ?? "", body, footer }),
     text,
   };
 }

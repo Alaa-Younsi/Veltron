@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { Logo } from "~/components/brand/logo";
 import { pagePath } from "~/config/paths";
 import { absoluteUrl, SITE } from "~/config/site";
-import { DEFAULT_LOCALE, isLocale, LOCALE_META, LOCALES, type Locale } from "~/i18n/config";
+import { DEFAULT_LOCALE, LOCALE_META, LOCALES } from "~/i18n/config";
 import type { Route } from "./+types/language-gateway";
 
 export const meta: Route.MetaFunction = () => [
@@ -12,24 +12,17 @@ export const meta: Route.MetaFunction = () => [
   { tagName: "link", rel: "canonical", href: absoluteUrl(`/${DEFAULT_LOCALE}`) },
 ];
 
-function preferredLocale(): Locale {
-  for (const lang of navigator.languages ?? [navigator.language]) {
-    const base = lang.toLowerCase().split("-")[0];
-    if (isLocale(base)) return base;
-  }
-  return DEFAULT_LOCALE;
-}
-
 /**
- * `/` — In production Vercel redirects by Accept-Language before this page is
- * served (see vercel.json). This page is the fallback for other hosts / local
- * preview: it redirects client-side and offers plain links without JS.
+ * `/` — English is the default language. In production Vercel redirects `/` to
+ * `/en` before this page is served (see vercel.json); this page is the fallback
+ * for other hosts / local preview: it redirects client-side and offers plain
+ * language links without JS.
  */
 export default function LanguageGateway() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(pagePath(preferredLocale(), "home"), { replace: true });
+    navigate(pagePath(DEFAULT_LOCALE, "home"), { replace: true });
   }, [navigate]);
 
   return (

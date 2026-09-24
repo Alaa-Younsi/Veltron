@@ -3,7 +3,8 @@
 Corporate website for **VELTRON Global Trading Limited** (Hong Kong): international trading of cement,
 clinker, gypsum, construction materials and industrial raw materials.
 
-- 🌍 Trilingual — **English, French, Arabic (RTL)** — with `hreflang`, localized SEO and language-aware redirects
+- 🌍 Trilingual — **English (default), French, Simplified Chinese** — with `hreflang` and localized SEO
+- 💬 Floating WhatsApp click-to-chat button with a localized pre-filled message
 - ⚡ Fully **pre-rendered static HTML** (37 pages) that hydrates into a SPA — fast, crawlable, cheap to host
 - ✉️ **Inquiry backend** on Vercel Functions: validation, anti-spam (Turnstile + honeypot + timing), rate limiting and branded emails via Resend
 
@@ -37,7 +38,7 @@ app/
   routes.ts               Route table (/:lang/...)
   routes/                 Pages (loaders run at build time → per-page content only)
   components/             brand · layout · sections · ui · forms · map
-  i18n/dictionaries/      ✏️  ALL SITE COPY — en.ts (master), fr.ts, ar.ts
+  i18n/dictionaries/      ✏️  ALL SITE COPY — en.ts (master), fr.ts, zh.ts
   config/site.ts          ✏️  Company details (address, optional public email/phone)
   config/paths.ts         URL structure
   content/                Map coordinates, product ↔ image mapping
@@ -114,8 +115,9 @@ missing (never its value); the form shows a friendly "temporarily unavailable" m
 
 ## How it works
 
-- **Routing & i18n** — every page lives under `/{en|fr|ar}/…`. `/` redirects by `Accept-Language`
-  (Vercel redirects), with a client-side fallback page. Switching language keeps the visitor on the same page.
+- **Routing & i18n** — every page lives under `/{en|fr|zh}/…`. English is the default: `/` redirects to
+  `/en` (Vercel redirect, with a client-side fallback page). Switching language keeps the visitor on the same page.
+  Chinese text uses the platform's CJK system fonts (PingFang SC / Microsoft YaHei / Noto Sans SC) — no web-font download.
 - **Pre-rendering** — each route's `loader` runs at build time and returns only the copy that page needs,
   so dictionaries never ship in the JavaScript bundle. Unknown URLs are served by `404.html` with a real 404 status.
 - **Inquiry pipeline** (`api/contact.ts`): origin check → JSON/size limits → rate limit → zod validation →
@@ -126,10 +128,10 @@ missing (never its value); the form shows a friendly "temporarily unavailable" m
 
 ## Editing content
 
-- **Text** — `app/i18n/dictionaries/en.ts` is the master copy; `fr.ts` and `ar.ts` are type-checked
+- **Text** — `app/i18n/dictionaries/en.ts` is the master copy; `fr.ts` and `zh.ts` are type-checked
   against it, so a missing translation fails the build.
-- **Company details** — `app/config/site.ts` (address, optional public email / phone / WhatsApp —
-  leave empty to hide).
+- **Company details** — `app/config/site.ts` (address, WhatsApp number used by the floating button,
+  optional public email / phone — leave empty to hide).
 - **Photos** — replace files in `scripts/images-source/` (same file names) and run `bun run assets:images`.
   Current photos are **CC0 / public domain** (see `scripts/images-source/credits.json`) and are
   placeholders until the client provides their own photography.
@@ -139,4 +141,4 @@ missing (never its value); the form shows a friendly "temporarily unavailable" m
 
 - Product specifications are typical values and are labelled as such on the site; final specifications
   are confirmed per contract.
-- Fonts: Montserrat, Inter, Noto Kufi Arabic, Noto Sans Arabic (SIL Open Font License), self-hosted.
+- Fonts: Montserrat and Inter (SIL Open Font License), self-hosted; Chinese uses system fonts.

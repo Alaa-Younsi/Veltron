@@ -1,9 +1,10 @@
 import { ArrowUp, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router";
 import { Logo } from "~/components/brand/logo";
+import { WhatsAppIcon } from "~/components/brand/whatsapp-icon";
 import { AddressLines } from "~/components/ui/address-lines";
 import { pagePath, productPath } from "~/config/paths";
-import { SITE } from "~/config/site";
+import { SITE, whatsappUrl } from "~/config/site";
 import { useLocaleContext } from "~/i18n/use-locale";
 import { NAV_PAGES } from "./nav-pages";
 
@@ -94,6 +95,19 @@ export function Footer() {
               >
                 <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold-400" />
                 <bdi>{SITE.contact.phone}</bdi>
+              </a>
+            ) : null}
+            {SITE.contact.whatsapp ? (
+              <a
+                href={whatsappUrl(SITE.contact.whatsapp, common.whatsapp.message)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-3 hover:text-gold-300"
+              >
+                <WhatsAppIcon className="mt-0.5 size-4 shrink-0 text-gold-400" />
+                <span>
+                  {common.labels.whatsapp} · <bdi>{SITE.contact.whatsapp}</bdi>
+                </span>
               </a>
             ) : null}
           </address>

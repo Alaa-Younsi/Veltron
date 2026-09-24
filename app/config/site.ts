@@ -9,7 +9,7 @@
 const PUBLIC_CONTACT: { email: string; phone: string; whatsapp: string } = {
   email: "",
   phone: "",
-  whatsapp: "",
+  whatsapp: "+213 550 68 40 00",
 };
 
 export const SITE = {
@@ -36,6 +36,12 @@ export const SITE = {
   /** Office hours, Hong Kong Time (UTC+8). */
   hours: { open: "09:00", close: "18:00" },
 } as const;
+
+/** WhatsApp click-to-chat link, optionally with a pre-filled message. */
+export function whatsappUrl(number: string, message?: string): string {
+  const digits = number.replace(/\D/g, "");
+  return `https://wa.me/${digits}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+}
 
 export function absoluteUrl(path: string): string {
   return `${SITE.url}${path.startsWith("/") ? path : `/${path}`}`;

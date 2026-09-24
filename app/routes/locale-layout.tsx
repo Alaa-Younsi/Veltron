@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router";
 import { Footer } from "~/components/layout/footer";
 import { Header } from "~/components/layout/header";
+import { WhatsAppButton } from "~/components/layout/whatsapp-button";
 import { getDictionary, requireLocale } from "~/i18n/server";
 import { PRODUCT_SLUGS } from "~shared/catalog";
 import type { Route } from "./+types/locale-layout";
@@ -48,6 +49,7 @@ export default function LocaleLayout({ loaderData }: Route.ComponentProps) {
         <Outlet />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }

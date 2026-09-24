@@ -62,6 +62,10 @@ export const fr: Dictionary = {
       title: "Un besoin ? Construisons ensemble le bon plan d’approvisionnement.",
       text: "Indiquez le produit, le volume, le port de destination et l’Incoterm souhaité. Nous vous répondrons avec une offre claire et sur mesure.",
     },
+    whatsapp: {
+      label: "Discuter sur WhatsApp",
+      message: "Bonjour VELTRON, je souhaite discuter d’un besoin d’approvisionnement.",
+    },
   },
 
   products: {

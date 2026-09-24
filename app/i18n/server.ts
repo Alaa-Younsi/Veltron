@@ -5,11 +5,11 @@
  */
 import { data } from "react-router";
 import { isLocale, type Locale } from "./config";
-import { ar } from "./dictionaries/ar";
 import { type Dictionary, en } from "./dictionaries/en";
 import { fr } from "./dictionaries/fr";
+import { zh } from "./dictionaries/zh";
 
-const DICTIONARIES: Record<Locale, Dictionary> = { en, fr, ar };
+const DICTIONARIES: Record<Locale, Dictionary> = { en, fr, zh };
 
 export function getDictionary(locale: Locale): Dictionary {
   return DICTIONARIES[locale];

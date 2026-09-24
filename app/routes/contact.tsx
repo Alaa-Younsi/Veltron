@@ -1,13 +1,14 @@
-import { Clock, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { WhatsAppIcon } from "~/components/brand/whatsapp-icon";
 import { InquiryForm } from "~/components/forms/inquiry-form";
 import { PageHero } from "~/components/sections/page-hero";
 import { AddressLines } from "~/components/ui/address-lines";
 import { Button } from "~/components/ui/button";
 import { Reveal } from "~/components/ui/reveal";
 import { PAGES, pagePath } from "~/config/paths";
-import { SITE } from "~/config/site";
+import { SITE, whatsappUrl } from "~/config/site";
 import { getDictionary, requireLocale } from "~/i18n/server";
 import { innerPageMeta } from "~/lib/page-meta";
 import { revalidateOnLocaleChange } from "~/lib/revalidate";
@@ -23,6 +24,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     labels: dict.common.labels,
     meta: dict.meta,
     homeLabel: dict.common.labels.home,
+    whatsappMessage: dict.common.whatsapp.message,
   };
 }
 
@@ -34,7 +36,7 @@ export const shouldRevalidate = revalidateOnLocaleChange;
 const MAP_QUERY = encodeURIComponent(SITE.address.mapQuery);
 
 export default function Contact({ loaderData }: Route.ComponentProps) {
-  const { page, form, labels, locale, homeLabel } = loaderData;
+  const { page, form, labels, locale, homeLabel, whatsappMessage } = loaderData;
 
   return (
     <>
@@ -86,9 +88,9 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
                 </InfoRow>
               ) : null}
               {SITE.contact.whatsapp ? (
-                <InfoRow icon={<MessageCircle className="size-5" />} label={labels.whatsapp}>
+                <InfoRow icon={<WhatsAppIcon className="size-5" />} label={labels.whatsapp}>
                   <a
-                    href={`https://wa.me/${SITE.contact.whatsapp.replace(/\D/g, "")}`}
+                    href={whatsappUrl(SITE.contact.whatsapp, whatsappMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-gold-300"

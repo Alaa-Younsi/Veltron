@@ -13,7 +13,7 @@ import type { Route } from "./+types/root";
 import { NotFoundView } from "./components/layout/not-found-view";
 import { allLocalizedPaths } from "./config/paths";
 import { SITE } from "./config/site";
-import { DEFAULT_LOCALE, getDirection, localeFromPathname } from "./i18n/config";
+import { DEFAULT_LOCALE, getDirection, LOCALE_META, localeFromPathname } from "./i18n/config";
 import "./app.css";
 
 const KNOWN_PATHS = new Set(allLocalizedPaths());
@@ -29,16 +29,17 @@ export function Layout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const locale = localeFromPathname(pathname) ?? DEFAULT_LOCALE;
   const dir = getDirection(locale);
+  const lang = LOCALE_META[locale].hreflang;
 
   // React does not patch <html> attributes on hydration mismatch (e.g. the static
-  // 404 fallback served for /ar/...), so keep them in sync explicitly.
+  // 404 fallback served for /zh/...), so keep them in sync explicitly.
   useEffect(() => {
-    document.documentElement.lang = locale;
+    document.documentElement.lang = lang;
     document.documentElement.dir = dir;
-  }, [locale, dir]);
+  }, [lang, dir]);
 
   return (
-    <html lang={locale} dir={dir}>
+    <html lang={lang} dir={dir}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

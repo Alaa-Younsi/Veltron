@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
-/* Self-hosted variable fonts. Arabic faces only download on Arabic pages
-   (unicode-range subsetting), Latin faces cover English & French. */
+/* Self-hosted Latin variable fonts (English & French). Chinese uses the
+   platform's CJK system fonts — no multi-megabyte web-font download. */
 @import "@fontsource-variable/montserrat";
 @import "@fontsource-variable/inter";
-@import "@fontsource-variable/noto-kufi-arabic";
-@import "@fontsource-variable/noto-sans-arabic";
 
 /* ------------------------------------------------------------------ */
 /* Design tokens — derived from the VELTRON logo (slate ink + gold)    */
@@ -48,9 +46,9 @@
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   --animate-marquee: marquee 48s linear infinite;
-  --animate-marquee-rtl: marquee-rtl 48s linear infinite;
   --animate-pulse-ring: pulse-ring 2.8s var(--ease-out-expo) infinite;
   --animate-dash: dash 3.2s linear infinite;
+  --animate-ping-soft: ping-soft 3.2s var(--ease-out-expo) infinite;
   --animate-rise: rise 1s var(--ease-out-expo) both;
   --animate-fade: fade 1.4s var(--ease-out-expo) both;
   --animate-scroll-cue: scroll-cue 2.2s ease-in-out infinite;
@@ -63,14 +61,6 @@
       transform: translateX(-50%);
     }
   }
-  @keyframes marquee-rtl {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(50%);
-    }
-  }
   @keyframes pulse-ring {
     0% {
       transform: scale(0.6);
@@ -78,6 +68,17 @@
     }
     100% {
       transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+  @keyframes ping-soft {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    70%,
+    100% {
+      transform: scale(1.55);
       opacity: 0;
     }
   }
@@ -128,17 +129,17 @@
   }
 }
 
-/* Arabic typography: Kufi display + Naskh-style sans, no letter-spacing
-   (tracking breaks Arabic letter joining). */
-html:lang(ar) {
-  --font-sans: "Noto Sans Arabic Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Noto Kufi Arabic Variable", "Montserrat Variable", ui-sans-serif, sans-serif;
-  --tracking-eyebrow: 0;
-  --tracking-wordmark: 0;
-}
-html:lang(ar) body * {
-  /* biome-ignore lint/complexity/noImportantStyles: tracking utilities must never apply to Arabic script */
-  letter-spacing: 0 !important;
+/* Simplified Chinese: Latin glyphs keep the brand fonts, CJK falls back to the
+   best available system face. Wide tracking is reduced for CJK legibility. */
+html:lang(zh) {
+  --font-sans:
+    "Inter Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+    "Source Han Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Montserrat Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+    "Source Han Sans SC", ui-sans-serif, sans-serif;
+  --tracking-eyebrow: 0.14em;
+  --tracking-wordmark: 0.2em;
 }
 
 /* ------------------------------------------------------------------ */

@@ -10,7 +10,7 @@ export const LOCALE_META: Record<
 > = {
   en: { label: "English", short: "EN", dir: "ltr", hreflang: "en", ogLocale: "en_US" },
   fr: { label: "Français", short: "FR", dir: "ltr", hreflang: "fr", ogLocale: "fr_FR" },
-  ar: { label: "العربية", short: "ع", dir: "rtl", hreflang: "ar", ogLocale: "ar_AR" },
+  zh: { label: "简体中文", short: "中文", dir: "ltr", hreflang: "zh-Hans", ogLocale: "zh_CN" },
 };
 
 export function getDirection(locale: Locale): Direction {

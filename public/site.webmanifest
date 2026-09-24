@@ -1,0 +1,14 @@
+{
+  "name": "VELTRON Global Trading Limited",
+  "short_name": "VELTRON",
+  "description": "International trading of cement, clinker, gypsum, construction materials and industrial raw materials.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141D1F",
+  "theme_color": "#141D1F",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

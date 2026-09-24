@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* Self-hosted variable fonts. Arabic faces only download on Arabic pages
+   (unicode-range subsetting), Latin faces cover English & French. */
+@import "@fontsource-variable/montserrat";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/noto-kufi-arabic";
+@import "@fontsource-variable/noto-sans-arabic";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens — derived from the VELTRON logo (slate ink + gold)    */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Montserrat Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-50: #f2f5f5;
+  --color-ink-100: #e3e9ea;
+  --color-ink-200: #c7d2d4;
+  --color-ink-300: #9fb0b3;
+  --color-ink-400: #71868a;
+  --color-ink-500: #53686c;
+  --color-ink-600: #3e5154;
+  --color-ink-700: #2b3a3d;
+  --color-ink-800: #212d30;
+  --color-ink-900: #182225;
+  --color-ink-950: #0f1719;
+
+  --color-gold-50: #fbf6ea;
+  --color-gold-100: #f5e9cb;
+  --color-gold-200: #edd49a;
+  --color-gold-300: #e6bf6e;
+  --color-gold-400: #ddb05a;
+  --color-gold-500: #d4a24c;
+  --color-gold-600: #b3853c;
+  --color-gold-700: #8f6830;
+  --color-gold-800: #6e5028;
+  --color-gold-900: #533d20;
+
+  --color-paper: #f7f5f0;
+  --color-sand: #efebe3;
+  --color-line: #e3e0d8;
+
+  --tracking-eyebrow: 0.28em;
+  --tracking-wordmark: 0.34em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-marquee: marquee 48s linear infinite;
+  --animate-marquee-rtl: marquee-rtl 48s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.8s var(--ease-out-expo) infinite;
+  --animate-dash: dash 3.2s linear infinite;
+  --animate-rise: rise 1s var(--ease-out-expo) both;
+  --animate-fade: fade 1.4s var(--ease-out-expo) both;
+  --animate-scroll-cue: scroll-cue 2.2s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes marquee-rtl {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(50%);
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes scroll-cue {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(260%);
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* Honour reduced-motion for every CSS animation and transition. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: accessibility override must beat component styles */
+    animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: accessibility override must beat component styles */
+    animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: accessibility override must beat component styles */
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Arabic typography: Kufi display + Naskh-style sans, no letter-spacing
+   (tracking breaks Arabic letter joining). */
+html:lang(ar) {
+  --font-sans: "Noto Sans Arabic Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Noto Kufi Arabic Variable", "Montserrat Variable", ui-sans-serif, sans-serif;
+  --tracking-eyebrow: 0;
+  --tracking-wordmark: 0;
+}
+html:lang(ar) body * {
+  /* biome-ignore lint/complexity/noImportantStyles: tracking utilities must never apply to Arabic script */
+  letter-spacing: 0 !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Lock page scroll while a modal dialog (mobile menu) is open. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink-800 antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance text-ink-900;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  ::selection {
+    @apply bg-gold-300 text-ink-950;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-gold-500 outline-offset-3;
+  }
+
+  /* Numbers & codes stay left-to-right inside RTL text. */
+  bdi,
+  .ltr-nums {
+    unicode-bidi: isolate;
+    direction: ltr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+@utility container-page {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Subtle film grain for dark surfaces. */
+@utility bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Engineering grid used behind hero sections. */
+@utility bg-blueprint {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility bg-blueprint-light {
+  background-image:
+    linear-gradient(to right, rgb(43 58 61 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(43 58 61 / 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility text-gold-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-200),
+    var(--color-gold-400) 45%,
+    var(--color-gold-600)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}

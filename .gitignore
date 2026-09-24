@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+/build/
+/.react-router/
+/.vercel/
+dist/
+
+# Environment — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

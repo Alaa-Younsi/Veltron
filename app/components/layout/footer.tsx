@@ -1,5 +1,6 @@
 import { ArrowUp, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router";
+import { FooterWordmark } from "~/components/brand/footer-wordmark";
 import { Logo } from "~/components/brand/logo";
 import { WhatsAppIcon } from "~/components/brand/whatsapp-icon";
 import { AddressLines } from "~/components/ui/address-lines";
@@ -115,13 +116,11 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Oversized outlined wordmark — fills with gold on hover, rises in on scroll. */}
-      <div aria-hidden="true" className="container-page relative select-none overflow-hidden">
-        <p className="rise-on-view group/wordmark translate-y-[14%] text-center font-display font-semibold text-[clamp(4.5rem,17vw,16rem)] leading-[0.82] tracking-[0.06em]">
-          <span className="bg-[length:100%_0%] bg-bottom bg-linear-to-t from-gold-500 to-gold-200 bg-clip-text bg-no-repeat text-transparent transition-[background-size] duration-[1.2s] ease-out-expo [-webkit-text-stroke:1px_rgb(230_191_110/0.3)] group-hover/wordmark:bg-[length:100%_100%]">
-            VELTRON
-          </span>
-        </p>
+      {/* Oversized outlined wordmark — gold fill rises on hover, rises in on scroll. */}
+      <div aria-hidden="true" className="container-page relative select-none overflow-hidden pt-4">
+        <div className="rise-on-view translate-y-[12%]">
+          <FooterWordmark />
+        </div>
       </div>
 
       <div className="relative border-white/[0.08] border-t">

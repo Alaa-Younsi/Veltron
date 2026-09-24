@@ -90,7 +90,6 @@ export default function Logistics({ loaderData }: Route.ComponentProps) {
         text={page.hero.text}
         image="port-loading"
         crumbs={[{ label: homeLabel, to: pagePath(locale, "home") }, { label: page.title }]}
-        breadcrumbLabel={homeLabel}
       />
 
       {/* Services */}

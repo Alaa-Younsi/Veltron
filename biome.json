@@ -17,7 +17,8 @@
       "!.vercel",
       "!supabase/functions",
       "!public/**/*.svg",
-      "!public/**/*.webmanifest"
+      "!public/**/*.webmanifest",
+      "!**/*.generated.ts"
     ]
   },
   "formatter": {
@@ -40,21 +41,27 @@
         "useImportType": "error",
         "useConsistentTypeDefinitions": {
           "level": "error",
-          "options": { "style": "type" }
+          "options": {
+            "style": "type"
+          }
         }
       },
       "suspicious": {
         "noExplicitAny": "error",
         "noConsole": {
           "level": "error",
-          "options": { "allow": ["error", "warn", "info"] }
+          "options": {
+            "allow": ["error", "warn", "info"]
+          }
         }
       },
       "nursery": {
         "useSortedClasses": {
           "level": "error",
           "fix": "safe",
-          "options": { "functions": ["cn", "clsx"] }
+          "options": {
+            "functions": ["cn", "clsx"]
+          }
         }
       }
     }
@@ -84,7 +91,9 @@
       "includes": ["scripts/**"],
       "linter": {
         "rules": {
-          "suspicious": { "noConsole": "off" }
+          "suspicious": {
+            "noConsole": "off"
+          }
         }
       }
     }

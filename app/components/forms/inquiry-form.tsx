@@ -388,7 +388,7 @@ export function InquiryForm({ locale, copy }: InquiryFormProps) {
             className="min-h-[65px]"
           />
         ) : null}
-        <p className="text-ink-400 text-xs">{copy.privacyNote}</p>
+        <p className="text-ink-500 text-xs">{copy.privacyNote}</p>
       </div>
 
       <div className="flex flex-col gap-4 sm:col-span-2">

@@ -79,13 +79,18 @@ import type { GeoPointId } from "~/content/geo";
 export const WORLD_MAP = {
   width: ${WIDTH},
   height: ${HEIGHT},
-  dotPitch: ${STEP},
-  dots: ${JSON.stringify(segments.join(""))},
+  /** Static dot-grid layer (cached asset, kept out of the HTML and JS bundles). */
+  dotsSrc: "/data/world-dots.svg",
 } as const;
 
 export const PROJECTED_POINTS: Record<GeoPointId, { readonly x: number; readonly y: number }> = ${JSON.stringify(points, null, 2)};
 `;
   await writeFile(join(root, "app/components/map/world-map.generated.ts"), ts);
+  await mkdir(join(root, "public/data"), { recursive: true });
+  await writeFile(
+    join(root, "public/data/world-dots.svg"),
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" width="${WIDTH}" height="${HEIGHT}"><path d="${segments.join("")}" fill="none" stroke="#71868a" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+  );
   console.log(`✔ World map generated (${segments.length} dots)`);
 
   await generateGlobeDots(land);

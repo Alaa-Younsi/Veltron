@@ -21,7 +21,6 @@ export const INQUIRY_PRODUCTS = [...PRODUCT_SLUGS, "logistics", "other"] as cons
 export type InquiryProduct = (typeof INQUIRY_PRODUCTS)[number];
 
 export const INCOTERMS = ["FOB", "CFR", "CIF", "other"] as const;
-export type Incoterm = (typeof INCOTERMS)[number];
 
 /** English labels used server-side (email subject/body sent to the business). */
 export const INQUIRY_PRODUCT_LABELS: Record<InquiryProduct, string> = {

@@ -2,7 +2,7 @@ import { DEFAULT_LOCALE, isLocale, LOCALES, type Locale } from "~shared/locales"
 
 export { DEFAULT_LOCALE, isLocale, LOCALES, type Locale };
 
-export type Direction = "ltr" | "rtl";
+type Direction = "ltr" | "rtl";
 
 export const LOCALE_META: Record<
   Locale,

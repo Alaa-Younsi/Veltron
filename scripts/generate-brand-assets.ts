@@ -359,6 +359,22 @@ ${lockupGroup(stacked, onDark, "g", `translate(${r(lx)} ${ly}) scale(${r(s * 100
 /* Main                                                                */
 /* ------------------------------------------------------------------ */
 
+/** Deterministic white-noise tile (white pixels, ~0–5.5 % alpha), seeded for reproducible output. */
+async function grainTile(size: number) {
+  let seed = 0x5eed;
+  const random = () => {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 0xffffffff;
+  };
+  const pixels = Buffer.alloc(size * size * 4);
+  for (let i = 0; i < size * size; i++) {
+    pixels.writeUInt32BE((0xffffff00 | Math.round(random() * 14)) >>> 0, i * 4);
+  }
+  return sharp(pixels, { raw: { width: size, height: size, channels: 4 } })
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+}
+
 /** Rasterises an SVG supersampled (4×) and downscaled to `width` for crisp edges. */
 async function png(svg: string, width: number) {
   return sharp(Buffer.from(svg), { density: 72 * 4 })
@@ -441,6 +457,11 @@ export const LOCKUPS = ${JSON.stringify({ stacked, horizontal, mark, wordmark },
 
   // 4. Social preview
   await writeFile(out("public/og-image.png"), await png(ogSvg(stacked, medium), 1200));
+
+  // 5. Film-grain tile — a pre-rendered PNG is far cheaper to paint than a live
+  //    SVG feTurbulence filter over full-screen sections.
+  await mkdir(out("public/textures"), { recursive: true });
+  await writeFile(out("public/textures/grain.png"), await grainTile(160));
 
   console.log("✔ Brand assets generated");
 }

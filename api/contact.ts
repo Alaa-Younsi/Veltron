@@ -72,12 +72,14 @@ export async function POST(request: Request): Promise<Response> {
     return json({ ok: true }, 200);
   }
 
-  const human = await verifyTurnstile({
+  const captcha = await verifyTurnstile({
     secret: env.TURNSTILE_SECRET_KEY,
     token: turnstileToken,
     ip,
   });
-  if (!human) return json({ ok: false, error: "captcha" }, 403);
+  if (captcha === "invalid") return json({ ok: false, error: "captcha" }, 403);
+  // Verifier outage is our problem, not the visitor's — report it as such.
+  if (captcha === "error") return json({ ok: false, error: "unavailable" }, 503);
 
   const reference = createReference();
   const params = {

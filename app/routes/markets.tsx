@@ -44,7 +44,6 @@ export default function Markets({ loaderData }: Route.ComponentProps) {
         text={page.hero.text}
         image="bulk-carrier-2"
         crumbs={[{ label: homeLabel, to: pagePath(locale, "home") }, { label: page.title }]}
-        breadcrumbLabel={homeLabel}
       />
 
       <section className="relative overflow-hidden bg-ink-950 pt-16 pb-24 text-white sm:pb-32">

@@ -32,9 +32,6 @@ export const fr: Dictionary = {
       headquarters: "Siège",
       company: "Entreprise",
       products: "Produits",
-      getInTouch: "Nous contacter",
-      getInTouchText:
-        "Indiquez-nous vos besoins — produit, volume et destination — et notre service commercial préparera une offre.",
       rights: "Tous droits réservés.",
       backToTop: "Retour en haut",
       registered: "Société enregistrée à Hong Kong (RAS)",
@@ -42,10 +39,6 @@ export const fr: Dictionary = {
     cta: {
       requestQuote: "Demander un devis",
       exploreProducts: "Découvrir nos produits",
-      learnMore: "En savoir plus",
-      contactUs: "Nous contacter",
-      viewDetails: "Voir le détail",
-      talkToUs: "Parler à notre service commercial",
     },
     labels: {
       address: "Adresse",
@@ -507,7 +500,6 @@ export const fr: Dictionary = {
         quoteText:
           "Indiquez la qualité, la quantité, le port de destination et l’Incoterm souhaité — nous vous répondrons avec une offre sur mesure.",
         backToProducts: "Tous les produits",
-        onThisPage: "Sur cette page",
       },
     },
 

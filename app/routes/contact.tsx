@@ -46,7 +46,6 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
         text={page.hero.text}
         image="hong-kong-night"
         crumbs={[{ label: homeLabel, to: pagePath(locale, "home") }, { label: page.title }]}
-        breadcrumbLabel={homeLabel}
       />
 
       <section className="container-page grid gap-10 py-20 sm:py-28 lg:grid-cols-12 lg:gap-12">

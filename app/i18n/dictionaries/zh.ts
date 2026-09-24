@@ -32,8 +32,6 @@ export const zh: Dictionary = {
       headquarters: "总部",
       company: "公司",
       products: "产品",
-      getInTouch: "联系我们",
-      getInTouchText: "告诉我们您的需求——产品、数量及目的地——我们的贸易团队将为您准备报价。",
       rights: "版权所有。",
       backToTop: "返回顶部",
       registered: "于中国香港特别行政区注册",
@@ -41,10 +39,6 @@ export const zh: Dictionary = {
     cta: {
       requestQuote: "获取报价",
       exploreProducts: "浏览产品",
-      learnMore: "了解更多",
-      contactUs: "联系我们",
-      viewDetails: "查看详情",
-      talkToUs: "联系贸易团队",
     },
     labels: {
       address: "地址",
@@ -374,7 +368,6 @@ export const zh: Dictionary = {
         quoteTitle: "获取{product}报价",
         quoteText: "请告知等级、数量、目的港及首选贸易术语，我们将为您提供量身定制的报价。",
         backToProducts: "全部产品",
-        onThisPage: "本页内容",
       },
     },
 

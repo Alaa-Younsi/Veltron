@@ -1,7 +1,7 @@
 import { type RefObject, useEffect, useRef } from "react";
 
 /** Pointer effects only make sense for a real mouse and when motion is welcome. */
-export function prefersRichPointer(): boolean {
+function prefersRichPointer(): boolean {
   return (
     window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches

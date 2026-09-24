@@ -20,22 +20,57 @@ function supportsWebGL(): boolean {
   }
 }
 
-type IdleHandle = { cancel: () => void };
-function whenIdle(callback: () => void): IdleHandle {
-  if ("requestIdleCallback" in window) {
-    const id = window.requestIdleCallback(callback, { timeout: 1500 });
-    return { cancel: () => window.cancelIdleCallback(id) };
-  }
-  const id = setTimeout(callback, 300);
-  return { cancel: () => clearTimeout(id) };
+type Handle = { cancel: () => void };
+
+const INTENT_EVENTS = [
+  "pointermove",
+  "pointerdown",
+  "wheel",
+  "scroll",
+  "keydown",
+  "touchstart",
+] as const;
+
+/**
+ * Runs `callback` once the visitor shows intent (first interaction) — or after
+ * a fallback delay — and then only when the browser is idle. This keeps the
+ * three.js parse/compile cost entirely out of the initial page load.
+ */
+function onIntentThenIdle(callback: () => void, fallbackMs = 10_000): Handle {
+  const hasIdle = typeof window.requestIdleCallback === "function";
+  let scheduled = 0;
+  let fired = false;
+  const run = () => {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    scheduled = hasIdle
+      ? window.requestIdleCallback(callback, { timeout: 1000 })
+      : window.setTimeout(callback, 50);
+  };
+  const timer = window.setTimeout(run, fallbackMs);
+  const cleanup = () => {
+    window.clearTimeout(timer);
+    for (const e of INTENT_EVENTS) window.removeEventListener(e, run);
+  };
+  for (const e of INTENT_EVENTS) window.addEventListener(e, run, { once: true, passive: true });
+  return {
+    cancel: () => {
+      cleanup();
+      if (!fired) return;
+      if (hasIdle) window.cancelIdleCallback(scheduled);
+      else window.clearTimeout(scheduled);
+    },
+  };
 }
 
 type TradeGlobeProps = { label: string; className?: string };
 
 /**
  * 3D trade globe. The pre-rendered SVG map is shown instantly (and remains the
- * fallback without WebGL); three.js is fetched only when the browser is idle,
- * then the live globe cross-fades in once its first frame has rendered.
+ * fallback without WebGL); three.js is fetched on the visitor's first
+ * interaction (or after a short fallback delay), then the live globe cross-fades
+ * in once its first frame has rendered.
  */
 export function TradeGlobe({ label, className }: TradeGlobeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -49,7 +84,7 @@ export function TradeGlobe({ label, className }: TradeGlobeProps) {
     let disposed = false;
     let instance: { dispose: () => void } | null = null;
 
-    const idle = whenIdle(async () => {
+    const idle = onIntentThenIdle(async () => {
       try {
         const { createTradeGlobe } = await import("./globe-scene");
         if (disposed) return;

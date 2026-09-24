@@ -16,7 +16,7 @@ const BRAND = {
   line: "#E3E1DA",
 } as const;
 
-export function escapeHtml(value: string): string {
+function escapeHtml(value: string): string {
   return value
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")

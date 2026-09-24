@@ -14,7 +14,6 @@ const PUBLIC_CONTACT: { email: string; phone: string; whatsapp: string } = {
 
 export const SITE = {
   name: "VELTRON Global Trading Limited",
-  shortName: "VELTRON",
   legalName: "VELTRON GLOBAL TRADING LIMITED",
   /** Absolute origin used for canonical URLs, sitemap and Open Graph (no trailing slash). */
   url: __SITE_URL__,
@@ -33,8 +32,6 @@ export const SITE = {
     mapQuery: "Wing Shing Industrial Building, 26 Ng Fong Street, San Po Kong, Hong Kong",
   },
   contact: PUBLIC_CONTACT,
-  /** Office hours, Hong Kong Time (UTC+8). */
-  hours: { open: "09:00", close: "18:00" },
 } as const;
 
 /** WhatsApp click-to-chat link, optionally with a pre-filled message. */

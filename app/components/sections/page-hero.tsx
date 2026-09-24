@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "~/components/ui/eyebrow";
 import { Picture } from "~/components/ui/picture";
+import { useLocaleContext } from "~/i18n/use-locale";
 import type { ImageName } from "~/lib/images.generated";
 import { cn } from "~/lib/utils";
 import { Breadcrumbs, type Crumb } from "./breadcrumbs";
@@ -12,7 +13,6 @@ type PageHeroProps = {
   image?: ImageName;
   imageAlt?: string;
   crumbs?: Crumb[];
-  breadcrumbLabel?: string;
   children?: ReactNode;
   className?: string;
 };
@@ -28,10 +28,10 @@ export function PageHero({
   image,
   imageAlt = "",
   crumbs,
-  breadcrumbLabel,
   children,
   className,
 }: PageHeroProps) {
+  const { common } = useLocaleContext();
   return (
     <section className={cn("relative isolate overflow-hidden bg-ink-950 text-white", className)}>
       {image ? (
@@ -58,8 +58,12 @@ export function PageHero({
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grain" />
 
       <div className="container-page flex min-h-[30rem] flex-col justify-end pt-36 pb-16 sm:min-h-[34rem] sm:pb-20 lg:pt-44">
-        {crumbs && breadcrumbLabel ? (
-          <Breadcrumbs items={crumbs} label={breadcrumbLabel} className="mb-10 animate-rise" />
+        {crumbs ? (
+          <Breadcrumbs
+            items={crumbs}
+            label={common.labels.breadcrumb}
+            className="mb-10 animate-rise"
+          />
         ) : null}
         <div className="flex max-w-3xl flex-col gap-6">
           <Eyebrow tone="light" className="animate-rise [animation-delay:80ms]">

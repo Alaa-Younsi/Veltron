@@ -45,7 +45,6 @@ export default function Products({ loaderData }: Route.ComponentProps) {
         text={page.hero.text}
         image="clinker-stockpile"
         crumbs={[{ label: homeLabel, to: pagePath(locale, "home") }, { label: page.title }]}
-        breadcrumbLabel={homeLabel}
       />
 
       <section className="container-page py-24 sm:py-28">

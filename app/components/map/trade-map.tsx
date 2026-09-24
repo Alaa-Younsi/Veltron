@@ -65,12 +65,12 @@ export function TradeMap({
           </linearGradient>
         </defs>
 
-        <path
-          d={WORLD_MAP.dots}
-          className="stroke-current"
-          strokeWidth={2.4}
-          strokeLinecap="round"
-          fill="none"
+        <image
+          href={WORLD_MAP.dotsSrc}
+          width={WORLD_MAP.width}
+          height={WORLD_MAP.height}
+          className="opacity-80"
+          preserveAspectRatio="none"
         />
 
         {/* Sourcing hubs → Hong Kong */}

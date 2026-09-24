@@ -47,7 +47,6 @@ export default function About({ loaderData }: Route.ComponentProps) {
         text={page.hero.text}
         image="hong-kong-harbour"
         crumbs={[{ label: homeLabel, to: pagePath(locale, "home") }, { label: page.title }]}
-        breadcrumbLabel={homeLabel}
       />
 
       {/* Story */}

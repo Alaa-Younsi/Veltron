@@ -1,4 +1,4 @@
-export type LockupTone = "ink" | "gold";
+type LockupTone = "ink" | "gold";
 
 export type LockupPart = {
   readonly d: string;

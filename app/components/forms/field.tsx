@@ -3,7 +3,7 @@ import { cn } from "~/lib/utils";
 
 export const controlClasses = cn(
   "w-full rounded-xl border border-ink-900/12 bg-white px-4 py-3 text-[15px] text-ink-900 shadow-[inset_0_1px_2px_rgb(15_23_25/0.04)] outline-none transition-[border-color,box-shadow] duration-200",
-  "placeholder:text-ink-300 hover:border-ink-900/25",
+  "placeholder:text-ink-400 hover:border-ink-900/25",
   "focus:border-gold-500 focus:ring-4 focus:ring-gold-500/15",
   "aria-invalid:border-red-600/70 aria-invalid:focus:ring-red-600/10",
 );
@@ -43,7 +43,7 @@ export function Field({
           ) : null}
         </span>
         {!required && optionalLabel ? (
-          <span className="font-normal text-ink-400 text-xs">{optionalLabel}</span>
+          <span className="font-normal text-ink-500 text-xs">{optionalLabel}</span>
         ) : null}
       </label>
       {children}

@@ -12,6 +12,10 @@ import { z } from "zod";
 import { INCOTERMS, INQUIRY_PRODUCTS } from "./catalog.js";
 import { LOCALES } from "./locales.js";
 
+// Skip zod's `new Function` capability probe: our strict CSP (no 'unsafe-eval')
+// would log it as a violation. The interpreted parser is plenty fast for one form.
+z.config({ jitless: true });
+
 export const FIELD_ERROR_CODES = [
   "required",
   "tooShort",
@@ -92,15 +96,11 @@ export const inquiryRequestSchema = inquiryFieldsSchema.extend({
   turnstileToken: z.string().max(4096).optional().default(""),
 });
 
-export type InquiryRequest = z.input<typeof inquiryRequestSchema>;
-
-export const INQUIRY_LIMITS = LIMITS;
-
 /* ------------------------------------------------------------------ */
 /* API response contract                                              */
 /* ------------------------------------------------------------------ */
 
-export const API_ERROR_CODES = [
+const API_ERROR_CODES = [
   "bad_request",
   "validation",
   "captcha",

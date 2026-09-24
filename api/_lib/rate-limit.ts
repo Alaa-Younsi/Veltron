@@ -13,7 +13,7 @@ import type { ServerEnv } from "./env.js";
 const LIMIT = 5;
 const WINDOW_MS = 10 * 60 * 1000;
 
-export type RateLimitResult = { success: boolean; retryAfterSeconds: number };
+type RateLimitResult = { success: boolean; retryAfterSeconds: number };
 
 let upstash: Ratelimit | null = null;
 

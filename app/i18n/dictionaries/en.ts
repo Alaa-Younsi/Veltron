@@ -37,9 +37,6 @@ export const en = {
       headquarters: "Headquarters",
       company: "Company",
       products: "Products",
-      getInTouch: "Get in touch",
-      getInTouchText:
-        "Tell us what you need — product, volume and destination — and our trading desk will prepare an offer.",
       rights: "All rights reserved.",
       backToTop: "Back to top",
       registered: "Registered in Hong Kong SAR",
@@ -47,10 +44,6 @@ export const en = {
     cta: {
       requestQuote: "Request a quote",
       exploreProducts: "Explore products",
-      learnMore: "Learn more",
-      contactUs: "Contact us",
-      viewDetails: "View details",
-      talkToUs: "Talk to our trading desk",
     },
     labels: {
       address: "Address",
@@ -492,7 +485,6 @@ export const en = {
         quoteText:
           "Tell us the grade, quantity, destination port and preferred Incoterm — we will respond with a tailored offer.",
         backToProducts: "All products",
-        onThisPage: "On this page",
       },
     },
 

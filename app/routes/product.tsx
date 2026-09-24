@@ -79,7 +79,6 @@ export default function Product({ loaderData }: Route.ComponentProps) {
           { label: productsLabel, to: pagePath(locale, "products") },
           { label: product.name },
         ]}
-        breadcrumbLabel={homeLabel}
       >
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
           <ButtonLink to={quoteHref} variant="gold" size="lg" arrow>
@@ -165,7 +164,7 @@ export default function Product({ loaderData }: Route.ComponentProps) {
                 </tbody>
               </table>
             </div>
-            <p className="flex items-start gap-2 text-ink-400 text-xs leading-relaxed">
+            <p className="flex items-start gap-2 text-ink-500 text-xs leading-relaxed">
               <Info aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
               {standardsNote}
             </p>

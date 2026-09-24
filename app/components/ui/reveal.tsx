@@ -16,7 +16,7 @@ type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
-  as?: "div" | "li" | "section" | "article";
+  as?: "div" | "li";
 };
 
 /**

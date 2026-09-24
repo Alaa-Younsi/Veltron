@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["app/routes/**/*.{ts,tsx}", "api/*.ts", "scripts/*.ts"],
+  "project": [
+    "app/**/*.{ts,tsx}",
+    "api/**/*.ts",
+    "shared/**/*.ts",
+    "scripts/**/*.ts",
+    "tooling/**/*.ts"
+  ],
+  "ignoreDependencies": [
+    "@fontsource-variable/inter",
+    "@fontsource-variable/montserrat",
+    "tailwindcss",
+    "world-atlas"
+  ]
+}

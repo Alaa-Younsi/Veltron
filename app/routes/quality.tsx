@@ -48,7 +48,6 @@ export default function Quality({ loaderData }: Route.ComponentProps) {
         text={page.hero.text}
         image="site-inspection"
         crumbs={[{ label: homeLabel, to: pagePath(locale, "home") }, { label: page.title }]}
-        breadcrumbLabel={homeLabel}
       />
 
       <ProcessTimeline

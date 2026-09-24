@@ -1,0 +1,32 @@
+PROPRIETARY LICENSE — ALL RIGHTS RESERVED
+
+Copyright (c) 2026 Alaa Younsi. All rights reserved.
+
+This repository and everything it contains — including but not limited to source
+code, application architecture, user-interface and visual designs, graphics,
+animations, scripts, configuration and documentation (together, the "Software") —
+is the proprietary work of Alaa Younsi.
+
+NO LICENSE IS GRANTED. Except as expressly authorised in advance and in writing by
+the copyright holder, no person or entity may, in whole or in part:
+
+  - use, run, deploy or host the Software;
+  - copy, reproduce, modify, adapt, translate or create derivative works of it;
+  - merge it into, or use it as the basis of, any other work or product;
+  - publish, distribute, sublicense, sell, lease or otherwise make it available
+    to any third party.
+
+The public visibility of this repository is solely for portfolio and viewing
+purposes. Viewing the Software does not transfer or imply any right, title,
+licence or interest in it.
+
+The VELTRON name, logo and brand assets belong to VELTRON Global Trading Limited
+and are not licensed for any use by this notice. Third-party open-source packages
+used by the Software remain subject to their own licences. Photographs are
+public-domain (CC0) placeholders; see scripts/images-source/credits.json.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE.
+
+For permission requests, contact Alaa Younsi via https://github.com/Alaa-Younsi.

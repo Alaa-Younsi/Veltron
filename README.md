@@ -1,166 +1,170 @@
-# VELTRON Global Trading Limited — Website
+<div align="center">
 
-Corporate website for **VELTRON Global Trading Limited** (Hong Kong): international trading of cement,
-clinker, gypsum, construction materials and industrial raw materials.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="public/brand/veltron-logo-light.svg" />
+  <img src="public/brand/veltron-logo.svg" alt="VELTRON Global Trading Limited" width="260" />
+</picture>
 
-- 🌍 Trilingual — **English (default), French, Simplified Chinese** — with `hreflang` and localized SEO
-- 💬 Floating WhatsApp click-to-chat button with a localized pre-filled message
-- ⚡ Fully **pre-rendered static HTML** (37 pages) that hydrates into a SPA — fast, crawlable, cheap to host
-- ✉️ **Inquiry backend** on Vercel Functions: validation, anti-spam (Turnstile + honeypot + timing), rate limiting and branded emails via Resend
+<h3>Corporate website for VELTRON Global Trading Limited</h3>
+
+<p>International trading of cement, clinker, gypsum, construction materials and industrial raw materials — Hong Kong.</p>
+
+<p>
+  <img alt="React 19" src="https://img.shields.io/badge/React-19-0f1719?style=flat-square&logo=react&logoColor=61DAFB" />
+  <img alt="React Router 8" src="https://img.shields.io/badge/React_Router-8-0f1719?style=flat-square&logo=reactrouter&logoColor=F44250" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-0f1719?style=flat-square&logo=typescript&logoColor=3178C6" />
+  <img alt="Vite 8" src="https://img.shields.io/badge/Vite-8-0f1719?style=flat-square&logo=vite&logoColor=A78BFA" />
+  <img alt="Tailwind CSS 4" src="https://img.shields.io/badge/Tailwind_CSS-4-0f1719?style=flat-square&logo=tailwindcss&logoColor=38BDF8" />
+  <img alt="three.js" src="https://img.shields.io/badge/three.js-WebGL-0f1719?style=flat-square&logo=threedotjs&logoColor=white" />
+  <img alt="Bun" src="https://img.shields.io/badge/Bun-1.3-0f1719?style=flat-square&logo=bun&logoColor=FBF0DF" />
+  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-deployed-0f1719?style=flat-square&logo=vercel&logoColor=white" />
+  <img alt="License: Proprietary" src="https://img.shields.io/badge/License-Proprietary-D4A24C?style=flat-square" />
+</p>
+
+</div>
 
 ---
 
-## Tech stack
+## Overview
 
-| Area | Choice |
+A multilingual, fully pre-rendered corporate website with a serverless inquiry backend. It pairs a premium editorial design — built around the client's slate-and-gold identity — with an interactive 3D trade globe, refined motion and a production-grade contact pipeline.
+
+- **37 statically pre-rendered pages** in **English, French and Simplified Chinese**
+- **Interactive WebGL globe** visualising the company's global trade routes
+- **Serverless inquiry API** with validation, spam protection, rate limiting and branded emails
+- **Lighthouse 100** for Accessibility, Best Practices and SEO · **97** Performance on desktop
+
+## Screenshots
+
+### Desktop
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/desktop-home.webp" alt="Home — hero with the 3D trade globe" /><p align="center"><sub><b>Home</b> — hero with the interactive 3D trade globe</sub></p></td>
+    <td width="50%"><img src="docs/screenshots/desktop-products.webp" alt="Home — product portfolio" /><p align="center"><sub><b>Product portfolio</b> — bento grid with 3D tilt cards</sub></p></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/desktop-product-detail.webp" alt="Product detail page" /><p align="center"><sub><b>Product detail</b> — grades, specifications, packaging</sub></p></td>
+    <td width="50%"><img src="docs/screenshots/desktop-markets.webp" alt="Markets — interactive trade map" /><p align="center"><sub><b>Markets</b> — interactive trade-network map</sub></p></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/desktop-contact.webp" alt="Contact — quote request form" /><p align="center"><sub><b>Contact</b> — quote request form</sub></p></td>
+    <td width="50%"><img src="docs/screenshots/desktop-home-zh.webp" alt="Home in Simplified Chinese" /><p align="center"><sub><b>Simplified Chinese</b> — full localisation</sub></p></td>
+  </tr>
+</table>
+
+### Mobile
+
+<table>
+  <tr>
+    <td width="25%"><img src="docs/screenshots/mobile-home.webp" alt="Mobile home" /><p align="center"><sub><b>Home</b></sub></p></td>
+    <td width="25%"><img src="docs/screenshots/mobile-menu.webp" alt="Mobile navigation" /><p align="center"><sub><b>Navigation</b></sub></p></td>
+    <td width="25%"><img src="docs/screenshots/mobile-product-detail.webp" alt="Mobile product detail" /><p align="center"><sub><b>Product detail</b></sub></p></td>
+    <td width="25%"><img src="docs/screenshots/mobile-contact.webp" alt="Mobile contact form in French" /><p align="center"><sub><b>Contact (French)</b></sub></p></td>
+  </tr>
+</table>
+
+## Features
+
+**Experience & design**
+- Custom brand system rebuilt from the client's printed logo as pixel-exact vector artwork (logo lockups, favicons, app icons, social preview image)
+- Interactive 3D globe (three.js) with great-circle trade routes, drag-to-spin and an animated Hong Kong hub
+- Page transitions (View Transitions API), smooth scrolling, scroll-driven parallax and progress indicator
+- 3D tilt cards, magnetic buttons, cursor-following spotlight, mask-reveal typography and count-up statistics
+- Floating WhatsApp click-to-chat with a localised pre-filled message
+- Fully responsive, from 360 px phones to wide desktop screens
+
+**Internationalisation**
+- English (default), French and Simplified Chinese, with language-preserving URLs (`/en`, `/fr`, `/zh`)
+- Type-checked dictionaries — a missing translation fails the build
+- Localised metadata, `hreflang` alternates and a multilingual sitemap
+
+**Inquiry backend**
+- Vercel Function (`POST /api/contact`) sharing one zod schema with the browser form
+- Cloudflare Turnstile, honeypot and fill-time heuristics against spam
+- Per-IP rate limiting (Upstash Redis, with an in-memory fallback)
+- Branded HTML notification via Resend (reply-to the visitor) and an optional localised auto-reply
+- Origin checks, payload limits, HTML escaping and header-injection-safe email subjects
+
+**Performance, accessibility & SEO**
+- Static pre-rendering: every page ships complete HTML, then hydrates into a single-page app
+- Responsive AVIF/WebP imagery, lazily loaded 3D and smooth-scroll code, no layout shift
+- WCAG AA contrast, keyboard navigation, focus management and full `prefers-reduced-motion` support
+- Strict Content Security Policy, HSTS and hardened security headers
+
+## Tech Stack
+
+| Layer | Technology |
 | --- | --- |
-| Runtime & package manager | [Bun](https://bun.sh) |
-| Framework | React 19 + [React Router 8](https://reactrouter.com) (framework mode, `ssr: false` + pre-rendering) on Vite 8 |
-| Language | TypeScript (strict, `noUncheckedIndexedAccess`) |
-| Styling | Tailwind CSS v4 (design tokens in `app/app.css`) |
-| Motion | [Motion](https://motion.dev) (`LazyMotion`, reduced-motion aware) |
-| Forms | react-hook-form + zod (one schema shared by browser and API) |
-| Email | [Resend](https://resend.com) |
-| Anti-spam | [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/), honeypot, fill-time heuristic |
-| Rate limiting | [Upstash Redis](https://upstash.com) (optional; in-memory fallback) |
-| Lint & format | [Biome](https://biomejs.dev) |
-| Hosting | [Vercel](https://vercel.com) (static output + Node.js Functions) |
+| Framework | React 19 · React Router 8 (framework mode, static pre-rendering) |
+| Language | TypeScript (strict) |
+| Build & runtime | Vite 8 · Bun |
+| Styling | Tailwind CSS 4 · custom design tokens |
+| Motion & 3D | Motion · three.js (WebGL) · Lenis · CSS scroll-driven animations |
+| Forms & validation | react-hook-form · zod |
+| Backend | Vercel Functions (Node.js 22) |
+| Email | Resend |
+| Security | Cloudflare Turnstile · Upstash Redis rate limiting · strict CSP |
+| Asset pipeline | sharp · opentype.js · d3-geo · topojson |
+| Code quality | Biome · knip |
+| Hosting | Vercel |
 
-## Project structure
+## Architecture
 
 ```
-api/                      Vercel Functions (server-only)
-  contact.ts              POST /api/contact — inquiry endpoint
-  _lib/                   env validation, rate limit, Turnstile, Resend mailer, email templates
-shared/                   Code shared by browser + API (zod schema, product catalog, locales)
+api/                  Serverless inquiry endpoint (Vercel Function)
+shared/               Code shared by browser and API — validation schema, catalogue, locales
 app/
-  root.tsx                Document shell, error boundary
-  routes.ts               Route table (/:lang/...)
-  routes/                 Pages (loaders run at build time → per-page content only)
-  components/             brand · layout · sections · ui · forms · map
-  i18n/dictionaries/      ✏️  ALL SITE COPY — en.ts (master), fr.ts, zh.ts
-  config/site.ts          ✏️  Company details (address, optional public email/phone)
-  config/paths.ts         URL structure
-  content/                Map coordinates, product ↔ image mapping
-  lib/                    SEO helpers, generated brand/image manifests
-public/                   Favicons, OG image, logo files, optimized images
-scripts/                  Asset pipelines (brand, images, world map) + post-build checks
-tooling/                  Dev-only Vite plugin that serves /api locally
+  routes/             Pages — loaders run at build time, so each page ships only its own content
+  components/         UI, layout, sections, 3D globe, map, forms and motion primitives
+  i18n/               Dictionaries (en · fr · zh) and locale utilities
+  config/             Site configuration and URL structure
+public/               Static assets — brand, icons, optimised images, map data
+scripts/              Asset pipelines (brand, images, maps) and build verification
 ```
 
-## Getting started
+## Getting Started
+
+**Prerequisites:** [Bun](https://bun.sh) 1.3+ · Node.js 22
 
 ```bash
 bun install
-cp .env.example .env      # then fill in values (see below)
-bun run dev               # http://localhost:5173 — the site AND /api/contact
+cp .env.example .env   # fill in the values below
+bun run dev            # http://localhost:5173 — site and API
 ```
-
-The dev server runs the real API code, so the full inquiry flow works locally. Without a
-`VITE_TURNSTILE_SITE_KEY`, local development automatically uses Cloudflare's always-pass test key.
-For local testing, set `TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA` (test secret).
-
-### Scripts
 
 | Command | Description |
 | --- | --- |
-| `bun run dev` | Dev server with HMR + local API |
-| `bun run build` | Production build + pre-rendering + post-build verification |
+| `bun run dev` | Development server (site + local API) |
+| `bun run build` | Production build with pre-rendering and output verification |
 | `bun run preview` | Serve the production build locally |
-| `bun run typecheck` | Route type generation + `tsc` |
-| `bun run lint` / `lint:fix` | Biome lint + format check / autofix |
-| `bun run lint:deadcode` | [knip](https://knip.dev) — unused files, exports, types and dependencies |
-| `bun run format` | Biome format |
-| `bun run check` | typecheck + lint + dead-code + build (run before every push) |
-| `bun run assets:brand` | Regenerate logo lockups, favicons, app icons and OG image |
-| `bun run assets:images` | Re-optimize photos from `scripts/images-source` → AVIF/WebP |
-| `bun run assets:brand` also | Writes the film-grain texture (`public/textures/grain.png`) |
-| `bun run assets:map` | Regenerate the 2D dot map (`public/data/world-dots.svg`) and 3D globe dots (`public/data/globe-land.bin`) |
+| `bun run check` | Type-check, lint, dead-code analysis and production build |
 
-## Environment variables
+### Environment variables
 
-See [`.env.example`](.env.example). **Never commit `.env`.**
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `RESEND_API_KEY` | ✅ | Resend API key |
+| `CONTACT_TO_EMAIL` | ✅ | Inbox that receives inquiries (comma-separated for several) |
+| `CONTACT_FROM_EMAIL` | ✅ | Verified sender, e.g. `VELTRON Website <website@domain.com>` |
+| `TURNSTILE_SECRET_KEY` | ✅ | Cloudflare Turnstile secret key |
+| `VITE_TURNSTILE_SITE_KEY` | ✅ | Cloudflare Turnstile site key (build-time) |
+| `VITE_SITE_URL` | Recommended | Canonical site origin |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Recommended | Global rate limiting |
+| `CONTACT_AUTOREPLY` | Optional | `true` to send visitors a localised confirmation |
 
-| Variable | Scope | Required | Purpose |
-| --- | --- | --- | --- |
-| `RESEND_API_KEY` | server | ✅ | Resend API key |
-| `CONTACT_TO_EMAIL` | server | ✅ | Business inbox receiving inquiries (comma-separated for several) |
-| `CONTACT_FROM_EMAIL` | server | ✅ | Verified sender, e.g. `VELTRON Website <website@yourdomain.com>` |
-| `TURNSTILE_SECRET_KEY` | server | ✅ | Cloudflare Turnstile secret key |
-| `VITE_TURNSTILE_SITE_KEY` | public | ✅ (prod) | Cloudflare Turnstile site key |
-| `VITE_SITE_URL` | public | recommended | Canonical origin, e.g. `https://www.veltron.com` (falls back to the Vercel production domain) |
-| `CONTACT_AUTOREPLY` | server | – | `true` to send the visitor a localized confirmation |
-| `ALLOWED_ORIGINS` | server | – | Extra origins allowed to call the API |
-| `UPSTASH_REDIS_REST_URL` / `_TOKEN` | server | recommended | Global rate limiting across function instances |
+### Deployment
 
-If a required server variable is missing, the API responds `503` and logs **which** variable is
-missing (never its value); the form shows a friendly "temporarily unavailable" message.
+Deployed on **Vercel** — `vercel.json` defines the build, output, functions, redirects, caching and security headers. Import the repository, set the environment variables above and deploy.
 
-## Deployment (GitHub → Vercel)
+## Author
 
-Runtime: **Node.js 22** (pinned via `engines`). The repository is already on GitHub
-(`Alaa-Younsi/Veltron`); every push to `main` redeploys once the project is linked.
+Designed and developed by **[Alaa Younsi](https://github.com/Alaa-Younsi)** — design, front-end, back-end, 3D and brand asset pipeline.
 
-1. **Import in Vercel** → *Add New… → Project* → select the repo. `vercel.json` already defines the
-   install/build commands (Bun), output directory, functions, redirects, caching and security headers —
-   keep the framework preset as **Other**.
-2. **Set environment variables** (Project → Settings → Environment Variables) for *Production* and *Preview*.
-3. **Resend** — add and verify your sending domain (DNS records) at resend.com, then use an address on
-   that domain for `CONTACT_FROM_EMAIL`. Until the domain is verified, Resend only delivers to the
-   account owner's own address.
-4. **Turnstile** — create a widget at dash.cloudflare.com → Turnstile, add your production domain(s) and
-   your `…vercel.app` deployment domain(s) as hostnames, copy the site/secret keys into the env vars.
-   `VITE_TURNSTILE_SITE_KEY` is inlined at **build time** — redeploy after setting it. Without it the
-   production form cannot be submitted (the always-pass test key is dev-only by design).
-5. **Custom domain** — add it in Vercel → Domains, then set `VITE_SITE_URL` and redeploy so canonical
-   URLs, the sitemap and Open Graph tags use it.
-6. (Recommended) **Upstash** — create a Redis database (Vercel Marketplace integration) for global rate limiting.
+## License
 
-## How it works
+**Proprietary — All Rights Reserved.** © 2026 Alaa Younsi.
 
-- **Routing & i18n** — every page lives under `/{en|fr|zh}/…`. English is the default: `/` redirects to
-  `/en` (Vercel redirect, with a client-side fallback page). Switching language keeps the visitor on the same page.
-  Chinese text uses the platform's CJK system fonts (PingFang SC / Microsoft YaHei / Noto Sans SC) — no web-font download.
-- **Pre-rendering** — each route's `loader` runs at build time and returns only the copy that page needs,
-  so dictionaries never ship in the JavaScript bundle. Unknown URLs are served by `404.html` with a real 404 status.
-- **Inquiry pipeline** (`api/contact.ts`): origin check → JSON/size limits → rate limit → zod validation →
-  honeypot & fill-time heuristics (bots get a silent 200) → Turnstile verification → Resend notification
-  (idempotent, reply-to = visitor) → optional localized auto-reply.
-- **Security** — strict CSP, HSTS, `X-Frame-Options: DENY`, no secrets in the client, all user input
-  HTML-escaped in emails and header-injection-safe subjects.
+This source code is private property. No licence is granted: it may not be used, copied, modified, distributed or deployed, in whole or in part, without prior written permission. The repository is publicly visible for portfolio purposes only. See [LICENSE](LICENSE) for the full terms.
 
-### Go-live verification
-
-After deploying with real environment variables:
-
-1. Open `/en/contact`, submit a test inquiry → it should arrive in `CONTACT_TO_EMAIL` with
-   *Reply-To* set to the visitor (and a localized confirmation if `CONTACT_AUTOREPLY=true`).
-2. Repeat from `/fr/contact` and `/zh/contact` (the notification shows the site language).
-3. Check `https://<domain>/sitemap.xml` and `/robots.txt` use the production domain.
-4. Submit the sitemap in Google Search Console.
-
-## Quality gates
-
-`bun run check` must pass before every push. It covers strict TypeScript, Biome lint/format,
-knip dead-code analysis and a production build whose post-build step verifies that all 37 pages
-were pre-rendered. Generated files (`*.generated.ts`) are excluded from Biome and rebuilt by the
-`assets:*` scripts.
-
-## Editing content
-
-- **Text** — `app/i18n/dictionaries/en.ts` is the master copy; `fr.ts` and `zh.ts` are type-checked
-  against it, so a missing translation fails the build.
-- **Company details** — `app/config/site.ts` (address, WhatsApp number used by the floating button,
-  optional public email / phone — leave empty to hide).
-- **Photos** — replace files in `scripts/images-source/` (same file names) and run `bun run assets:images`.
-  Current photos are **CC0 / public domain** (see `scripts/images-source/credits.json`) and are
-  placeholders until the client provides their own photography.
-- **Logo** — geometry lives in `app/lib/brand/mark.ts`; run `bun run assets:brand` after changes.
-
-## Notes
-
-- Product specifications are typical values and are labelled as such on the site; final specifications
-  are confirmed per contract.
-- Fonts: Montserrat and Inter (SIL Open Font License), self-hosted; Chinese uses system fonts.
-- knip reports the font packages, `tailwindcss` and `world-atlas` as unused because they are consumed
-  from CSS / by file path; they are listed in `knip.json` → `ignoreDependencies`.
+The VELTRON name and logo are the property of VELTRON Global Trading Limited.

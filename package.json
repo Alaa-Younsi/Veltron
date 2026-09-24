@@ -1,6 +1,9 @@
 {
   "name": "veltron-web",
   "version": "1.0.0",
+  "description": "Corporate website for VELTRON Global Trading Limited — international trading of cement, clinker and construction materials.",
+  "author": "Alaa Younsi (https://github.com/Alaa-Younsi)",
+  "license": "UNLICENSED",
   "private": true,
   "type": "module",
   "packageManager": "bun@1.3.13",

@@ -31,7 +31,7 @@ export function CtaBand() {
           </h2>
           <p className="text-ink-200 leading-relaxed sm:text-lg">{common.ctaBand.text}</p>
           <div className="mt-2 flex flex-wrap gap-3">
-            <ButtonLink to={pagePath(locale, "contact")} variant="gold" size="lg" arrow>
+            <ButtonLink to={pagePath(locale, "contact")} variant="gold" size="lg" arrow magnetic>
               {common.cta.requestQuote}
             </ButtonLink>
             <ButtonLink to={pagePath(locale, "products")} variant="outline-light" size="lg">

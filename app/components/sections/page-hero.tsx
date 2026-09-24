@@ -42,7 +42,7 @@ export function PageHero({
             sizes="100vw"
             priority
             className="absolute inset-0 -z-20 animate-fade"
-            imgClassName="opacity-45"
+            imgClassName="parallax-hero opacity-45"
           />
           <div
             aria-hidden="true"

@@ -1,4 +1,5 @@
 import { Ban, Leaf, type LucideIcon, ScanSearch, UserCheck } from "lucide-react";
+import { SpotlightGroup } from "~/components/motion/spotlight-group";
 import { CtaBand } from "~/components/sections/cta-band";
 import { PageHero } from "~/components/sections/page-hero";
 import { ProcessTimeline } from "~/components/sections/process-timeline";
@@ -66,13 +67,13 @@ export default function Quality({ loaderData }: Route.ComponentProps) {
             title={page.standards.title}
             tone="light"
           />
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <SpotlightGroup as="ul" className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {page.standards.items.map((standard, index) => (
               <Reveal
                 as="li"
                 key={standard.code}
                 delay={(index % 3) * 0.07}
-                className="flex items-center gap-6 rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-6"
+                className="spotlight spotlight-dark flex items-center gap-6 rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-6"
               >
                 <span className="ltr-nums shrink-0 font-display font-semibold text-gold-300 text-xl">
                   {standard.code}
@@ -81,7 +82,7 @@ export default function Quality({ loaderData }: Route.ComponentProps) {
                 <span className="text-ink-200 text-sm leading-snug">{standard.text}</span>
               </Reveal>
             ))}
-          </ul>
+          </SpotlightGroup>
         </div>
       </section>
 

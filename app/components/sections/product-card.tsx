@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
 import { Picture } from "~/components/ui/picture";
+import { useTilt } from "~/hooks/use-pointer-effects";
 import type { ImageName } from "~/lib/images.generated";
 import { cn } from "~/lib/utils";
 
@@ -26,11 +27,17 @@ export function ProductCard({
   featured = false,
   className,
 }: ProductCardProps) {
+  const tiltRef = useTilt<HTMLAnchorElement>(featured ? 4 : 7);
+
   return (
     <Link
+      ref={tiltRef}
       to={to}
+      viewTransition
       className={cn(
         "group relative isolate flex min-h-[20rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-ink-900 p-7 text-white sm:p-8",
+        // 3D tilt driven by CSS variables from useTilt (no re-renders).
+        "transition-[transform,box-shadow] duration-700 ease-out-expo [transform:perspective(1100px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] hover:shadow-[0_40px_80px_-40px_rgb(15_23_25/0.7)] data-tilting:duration-150",
         featured && "min-h-[26rem] lg:min-h-full",
         className,
       )}
@@ -50,6 +57,10 @@ export function ProductCard({
         aria-hidden="true"
         className="absolute inset-x-0 top-0 -z-10 h-32 bg-linear-to-b from-ink-950/70 to-transparent"
       />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_var(--gx,50%)_var(--gy,0%),rgb(255_255_255/0.18),transparent_48%)] opacity-0 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-100"
+      />
       <span className="ltr-nums absolute start-7 top-7 font-display font-semibold text-gold-300 text-xs tracking-[0.2em] sm:start-8 sm:top-8">
         {String(index).padStart(2, "0")}
       </span>
@@ -61,7 +72,7 @@ export function ProductCard({
       </span>
       <h3
         className={cn(
-          "font-semibold text-white tracking-tight",
+          "font-semibold text-white tracking-tight transition-transform duration-700 ease-out-expo group-hover:-translate-y-1",
           featured ? "text-3xl sm:text-4xl" : "text-2xl",
         )}
       >

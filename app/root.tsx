@@ -11,6 +11,7 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import { NotFoundView } from "./components/layout/not-found-view";
+import { SmoothScroll } from "./components/motion/smooth-scroll";
 import { allLocalizedPaths } from "./config/paths";
 import { SITE } from "./config/site";
 import { DEFAULT_LOCALE, getDirection, LOCALE_META, localeFromPathname } from "./i18n/config";
@@ -64,6 +65,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={domAnimation} strict>
+        <SmoothScroll />
         <Outlet />
       </LazyMotion>
     </MotionConfig>

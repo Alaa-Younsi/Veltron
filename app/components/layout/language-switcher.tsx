@@ -54,6 +54,7 @@ export function LanguageSwitcher({ locale, label, tone }: LanguageSwitcherProps)
           return (
             <li key={l}>
               <Link
+                viewTransition
                 to={`${switchLocalePath(pathname, l)}${search}${hash}`}
                 lang={l}
                 hrefLang={LOCALE_META[l].hreflang}

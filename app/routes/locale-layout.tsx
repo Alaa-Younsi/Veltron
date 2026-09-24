@@ -38,6 +38,10 @@ export default function LocaleLayout({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <div id="top" />
+      <div
+        aria-hidden="true"
+        className="scroll-progress pointer-events-none fixed inset-x-0 top-0 z-[60] h-0.5 bg-linear-to-r from-gold-300 via-gold-500 to-gold-600 [view-transition-name:scroll-progress]"
+      />
       <a
         href="#main"
         className="fixed start-4 top-4 z-[60] -translate-y-24 rounded-full bg-gold-500 px-5 py-3 font-semibold text-ink-950 text-sm shadow-lg transition-transform focus:translate-y-0"

@@ -1,4 +1,5 @@
 import { Compass, Handshake, Scale, ShieldCheck, Target, Timer } from "lucide-react";
+import { SpotlightGroup } from "~/components/motion/spotlight-group";
 import { CtaBand } from "~/components/sections/cta-band";
 import { PageHero } from "~/components/sections/page-hero";
 import { AddressLines } from "~/components/ui/address-lines";
@@ -103,7 +104,7 @@ export default function About({ loaderData }: Route.ComponentProps) {
       <section className="bg-sand/60 py-24 sm:py-32">
         <div className="container-page">
           <SectionHeading eyebrow={page.values.eyebrow} title={page.values.title} align="center" />
-          <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <SpotlightGroup as="ul" className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {values.map(([key, value], index) => {
               const Icon = VALUE_ICONS[key];
               return (
@@ -111,7 +112,7 @@ export default function About({ loaderData }: Route.ComponentProps) {
                   as="li"
                   key={key}
                   delay={index * 0.07}
-                  className="group flex flex-col gap-5 rounded-[1.5rem] border border-line bg-white p-8 transition-transform duration-500 ease-out-expo hover:-translate-y-1"
+                  className="spotlight group flex flex-col gap-5 rounded-[1.5rem] border border-line bg-white p-8 transition-transform duration-500 ease-out-expo hover:-translate-y-1"
                 >
                   <span className="grid size-12 place-items-center rounded-full border border-gold-500/40 text-gold-700 transition-colors group-hover:bg-gold-500 group-hover:text-ink-950">
                     <Icon aria-hidden="true" className="size-5" strokeWidth={1.7} />
@@ -121,7 +122,7 @@ export default function About({ loaderData }: Route.ComponentProps) {
                 </Reveal>
               );
             })}
-          </ul>
+          </SpotlightGroup>
         </div>
       </section>
 

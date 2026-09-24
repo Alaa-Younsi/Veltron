@@ -40,7 +40,7 @@ export function ProcessTimeline({
             <div
               aria-hidden="true"
               className={cn(
-                "absolute inset-x-0 top-6 hidden h-px lg:block",
+                "timeline-draw absolute inset-x-0 top-6 hidden h-px lg:block",
                 light ? "bg-white/15" : "bg-ink-900/10",
               )}
             />

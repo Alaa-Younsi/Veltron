@@ -30,6 +30,7 @@ export function ProductsMenu({ locale, common, productNav, tone }: ProductsMenuP
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={close}>
       <div className="flex items-center">
         <NavLink
+          viewTransition
           to={pagePath(locale, "products")}
           end={false}
           className={({ isActive }) => navLinkClasses(tone, isActive, "pe-1")}
@@ -63,6 +64,7 @@ export function ProductsMenu({ locale, common, productNav, tone }: ProductsMenuP
           <div className="grid grid-cols-2 gap-1 p-3">
             {productNav.map((product) => (
               <Link
+                viewTransition
                 key={product.slug}
                 to={productPath(locale, product.slug)}
                 onClick={close}
@@ -84,6 +86,7 @@ export function ProductsMenu({ locale, common, productNav, tone }: ProductsMenuP
           <div className="flex items-center justify-between gap-4 border-ink-900/[0.06] border-t bg-paper px-7 py-4">
             <p className="text-[13px] text-ink-500">{common.nav.productsIntro}</p>
             <Link
+              viewTransition
               to={pagePath(locale, "products")}
               onClick={close}
               className="inline-flex shrink-0 items-center gap-1.5 font-semibold text-[13px] text-gold-700 hover:text-ink-900"

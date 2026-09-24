@@ -5,7 +5,7 @@
  *
  * Run with: bun run assets:map
  */
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { geoContains, geoEqualEarth } from "d3-geo";
@@ -87,6 +87,35 @@ export const PROJECTED_POINTS: Record<GeoPointId, { readonly x: number; readonly
 `;
   await writeFile(join(root, "app/components/map/world-map.generated.ts"), ts);
   console.log(`✔ World map generated (${segments.length} dots)`);
+
+  await generateGlobeDots(land);
+}
+
+/**
+ * Evenly distributed land dots for the 3D globe (Fibonacci sphere sampling),
+ * written as a compact binary of Int16 pairs: [lat×100, lon×100, …].
+ * Fetched lazily by the globe so it never weighs on the JS bundle.
+ */
+async function generateGlobeDots(land: FeatureCollection<Polygon | MultiPolygon>) {
+  const SAMPLES = 24_000;
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  const coords: number[] = [];
+  for (let i = 0; i < SAMPLES; i++) {
+    const y = 1 - (i / (SAMPLES - 1)) * 2;
+    const theta = golden * i;
+    const lat = (Math.asin(y) * 180) / Math.PI;
+    const lon = (((((theta * 180) / Math.PI + 180) % 360) + 360) % 360) - 180;
+    if (lat < MIN_LAT) continue;
+    if (land.features.some((f) => geoContains(f, [lon, lat]))) {
+      coords.push(Math.round(lat * 100), Math.round(lon * 100));
+    }
+  }
+  await mkdir(join(root, "public/data"), { recursive: true });
+  await writeFile(
+    join(root, "public/data/globe-land.bin"),
+    Buffer.from(new Int16Array(coords).buffer),
+  );
+  console.log(`✔ Globe dots generated (${coords.length / 2} dots)`);
 }
 
 await main();

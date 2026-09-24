@@ -23,7 +23,11 @@ export function Breadcrumbs({
             <Fragment key={item.label}>
               <li>
                 {item.to && !last ? (
-                  <Link to={item.to} className="transition-colors hover:text-gold-300">
+                  <Link
+                    viewTransition
+                    to={item.to}
+                    className="transition-colors hover:text-gold-300"
+                  >
                     {item.label}
                   </Link>
                 ) : (

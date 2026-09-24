@@ -52,7 +52,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <HomeHero content={page.hero} />
+      <HomeHero content={page.hero} stats={page.stats} />
       <Marquee items={page.marquee} />
       <ProductsShowcase heading={page.productsSection} />
       <StatsBand stats={page.stats} />

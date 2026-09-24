@@ -11,6 +11,7 @@ import {
   Search,
   Ship,
 } from "lucide-react";
+import { SpotlightGroup } from "~/components/motion/spotlight-group";
 import { CtaBand } from "~/components/sections/cta-band";
 import { PageHero } from "~/components/sections/page-hero";
 import { Picture } from "~/components/ui/picture";
@@ -95,7 +96,10 @@ export default function Logistics({ loaderData }: Route.ComponentProps) {
       {/* Services */}
       <section className="container-page py-24 sm:py-32">
         <SectionHeading eyebrow={page.services.eyebrow} title={page.services.title} />
-        <ul className="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <SpotlightGroup
+          as="ul"
+          className="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
+        >
           {services.map(([key, service], index) => {
             const Icon = SERVICE_ICONS[key];
             return (
@@ -103,7 +107,7 @@ export default function Logistics({ loaderData }: Route.ComponentProps) {
                 as="li"
                 key={key}
                 delay={(index % 3) * 0.07}
-                className="group flex flex-col gap-5 bg-white p-8 transition-colors duration-500 hover:bg-paper sm:p-10"
+                className="spotlight group flex flex-col gap-5 bg-white p-8 sm:p-10"
               >
                 <div className="flex items-center justify-between">
                   <Icon aria-hidden="true" className="size-8 text-gold-600" strokeWidth={1.4} />
@@ -116,7 +120,7 @@ export default function Logistics({ loaderData }: Route.ComponentProps) {
               </Reveal>
             );
           })}
-        </ul>
+        </SpotlightGroup>
       </section>
 
       {/* Incoterms */}

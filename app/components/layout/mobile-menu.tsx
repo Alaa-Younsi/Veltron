@@ -38,6 +38,7 @@ export function MobileMenu({ open, onClose, locale, common, productNav }: Mobile
     <dialog
       ref={ref}
       onClose={onClose}
+      data-lenis-prevent=""
       aria-label={common.nav.mainNavigation}
       className={cn(
         "fixed inset-0 m-0 size-full max-h-none max-w-none bg-ink-950 p-0 text-white",
@@ -52,6 +53,7 @@ export function MobileMenu({ open, onClose, locale, common, productNav }: Mobile
       <div className="relative flex min-h-full flex-col">
         <div className="container-page flex h-20 shrink-0 items-center justify-between">
           <Link
+            viewTransition
             to={pagePath(locale, "home")}
             onClick={onClose}
             aria-label={common.nav.home}
@@ -74,6 +76,7 @@ export function MobileMenu({ open, onClose, locale, common, productNav }: Mobile
             {NAV_PAGES.map((page, index) => (
               <li key={page} className="border-white/10 border-b">
                 <NavLink
+                  viewTransition
                   to={pagePath(locale, page)}
                   end={page !== "products"}
                   onClick={onClose}
@@ -94,6 +97,7 @@ export function MobileMenu({ open, onClose, locale, common, productNav }: Mobile
                     {productNav.map((product) => (
                       <li key={product.slug}>
                         <Link
+                          viewTransition
                           to={productPath(locale, product.slug)}
                           onClick={onClose}
                           className="text-ink-200 text-sm transition-colors hover:text-white"
@@ -113,6 +117,7 @@ export function MobileMenu({ open, onClose, locale, common, productNav }: Mobile
           <nav className="flex items-center gap-2" aria-label={common.nav.language}>
             {LOCALES.map((l) => (
               <Link
+                viewTransition
                 key={l}
                 to={switchLocalePath(pathname, l)}
                 lang={l}

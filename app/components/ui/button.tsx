@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { Link } from "react-router";
+import { useMagnetic } from "~/hooks/use-pointer-effects";
 import { cn } from "~/lib/utils";
 
 const VARIANTS = {
@@ -50,18 +51,32 @@ function Content({ children, arrow }: { children: ReactNode; arrow?: boolean }) 
   );
 }
 
-type ButtonLinkProps = StyleProps & ComponentProps<typeof Link>;
+type ButtonLinkProps = StyleProps &
+  ComponentProps<typeof Link> & {
+    /** Subtle magnetic pull toward the cursor (desktop only). */
+    magnetic?: boolean;
+  };
 
 export function ButtonLink({
   variant,
   size,
   arrow,
+  magnetic = false,
   className,
   children,
   ...props
 }: ButtonLinkProps) {
+  const magneticRef = useMagnetic<HTMLAnchorElement>();
   return (
-    <Link className={buttonClasses({ variant, size }, className)} {...props}>
+    <Link
+      ref={magnetic ? magneticRef : undefined}
+      viewTransition
+      className={buttonClasses(
+        { variant, size },
+        cn(magnetic && "[translate:var(--mag-x,0px)_var(--mag-y,0px)]", className),
+      )}
+      {...props}
+    >
       <Content arrow={arrow}>{children as ReactNode}</Content>
     </Link>
   );

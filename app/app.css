@@ -51,6 +51,7 @@
   --animate-ping-soft: ping-soft 3.2s var(--ease-out-expo) infinite;
   --animate-rise: rise 1s var(--ease-out-expo) both;
   --animate-fade: fade 1.4s var(--ease-out-expo) both;
+  --animate-float: float 7s ease-in-out infinite;
   --animate-scroll-cue: scroll-cue 2.2s ease-in-out infinite;
 
   @keyframes marquee {
@@ -95,6 +96,15 @@
     to {
       opacity: 1;
       transform: none;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
     }
   }
   @keyframes scroll-cue {
@@ -245,4 +255,148 @@ html:lang(zh) {
 
 @utility mask-fade-x {
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion layer                                                        */
+/* ------------------------------------------------------------------ */
+
+/* Lenis smooth scrolling (rules from lenis/dist/lenis.css, which is not exported). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+html.lenis {
+  scroll-behavior: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Page transitions (View Transitions API, used by React Router links). The
+   header and floating controls keep their own snapshots so they never flash. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 280ms var(--ease-in-out-quart) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 620ms var(--ease-out-expo) both;
+  }
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: scale(0.985);
+    filter: blur(6px);
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+/* Cursor-following spotlight + gold edge light for card grids. */
+@layer components {
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before,
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+  .spotlight::before {
+    z-index: -1;
+    background: radial-gradient(
+      520px circle at var(--mx, -999px) var(--my, -999px),
+      var(--spot-color, rgb(212 162 76 / 0.14)),
+      transparent 42%
+    );
+  }
+  .spotlight::after {
+    padding: 1px;
+    background: radial-gradient(
+      280px circle at var(--mx, -999px) var(--my, -999px),
+      rgb(230 191 110 / 0.75),
+      transparent 60%
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+  .spotlight-dark {
+    --spot-color: rgb(212 162 76 / 0.16);
+  }
+  [data-spotlight-group]:hover .spotlight::before,
+  [data-spotlight-group]:hover .spotlight::after {
+    opacity: 1;
+  }
+}
+
+/* CSS scroll-driven effects — compositor-only, progressive enhancement. */
+.scroll-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      display: block;
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: scroll(root);
+    }
+    .parallax-hero {
+      animation: parallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+    .timeline-draw {
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 55%;
+    }
+    .rise-on-view {
+      animation: rise-view linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes parallax {
+  to {
+    transform: translateY(16%) scale(1.08);
+  }
+}
+@keyframes rise-view {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

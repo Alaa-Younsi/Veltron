@@ -1,6 +1,7 @@
 import { MapPin } from "lucide-react";
 import { useState } from "react";
 import { TradeMap } from "~/components/map/trade-map";
+import { SpotlightGroup } from "~/components/motion/spotlight-group";
 import { CtaBand } from "~/components/sections/cta-band";
 import { PageHero } from "~/components/sections/page-hero";
 import { Reveal } from "~/components/ui/reveal";
@@ -70,7 +71,7 @@ export default function Markets({ loaderData }: Route.ComponentProps) {
 
           <div className="mt-20">
             <SectionHeading title={page.regionsTitle} tone="light" />
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <SpotlightGroup as="ul" className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {regions.map(([id, region], index) => {
                 const selected = active === id;
                 return (
@@ -84,7 +85,7 @@ export default function Markets({ loaderData }: Route.ComponentProps) {
                       onFocus={() => setActive(id)}
                       onBlur={() => setActive(null)}
                       className={cn(
-                        "flex w-full flex-col gap-4 rounded-[1.5rem] border p-7 text-start transition-all duration-500 ease-out-expo",
+                        "spotlight spotlight-dark flex w-full flex-col gap-4 rounded-[1.5rem] border p-7 text-start transition-all duration-500 ease-out-expo",
                         selected
                           ? "border-gold-400/60 bg-gold-500/10"
                           : "border-white/10 bg-white/[0.03] hover:border-white/25",
@@ -122,7 +123,7 @@ export default function Markets({ loaderData }: Route.ComponentProps) {
                 <span className="font-display font-semibold text-lg">{page.originsTitle}</span>
                 <span className="text-ink-900 text-sm leading-relaxed">{page.originsText}</span>
               </Reveal>
-            </ul>
+            </SpotlightGroup>
           </div>
         </div>
       </section>

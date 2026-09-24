@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router";
 import { Logo } from "~/components/brand/logo";
 import { ButtonLink } from "~/components/ui/button";
 import { pagePath } from "~/config/paths";
+import { useHideOnScroll } from "~/hooks/use-hide-on-scroll";
 import { useScrolled } from "~/hooks/use-scrolled";
 import { useLocaleContext } from "~/i18n/use-locale";
 import { cn } from "~/lib/utils";
@@ -17,13 +18,15 @@ export function Header() {
   const { locale, common, productNav } = useLocaleContext();
   const scrolled = useScrolled(24);
   const [menuOpen, setMenuOpen] = useState(false);
+  const hidden = useHideOnScroll();
   const solid = scrolled;
   const tone = solid ? "dark" : "light";
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-500 ease-out-expo",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color,translate] duration-500 ease-out-expo [view-transition-name:site-header] focus-within:translate-y-0",
+        hidden && !menuOpen && "-translate-y-full",
         solid
           ? "border-ink-900/[0.06] border-b bg-paper/85 shadow-[0_8px_30px_-18px_rgb(15_23_25/0.25)] backdrop-blur-xl"
           : "border-transparent border-b bg-transparent",
@@ -32,6 +35,7 @@ export function Header() {
       <div className="container-page flex h-20 items-center justify-between gap-6">
         <Link
           to={pagePath(locale, "home")}
+          viewTransition
           aria-label={`VELTRON — ${common.nav.home}`}
           className={cn("shrink-0 transition-colors", solid ? "text-ink-700" : "text-white")}
         >
@@ -54,6 +58,7 @@ export function Header() {
                 <li key={page}>
                   <NavLink
                     to={pagePath(locale, page)}
+                    viewTransition
                     className={({ isActive }) => navLinkClasses(tone, isActive)}
                   >
                     {common.nav[page]}

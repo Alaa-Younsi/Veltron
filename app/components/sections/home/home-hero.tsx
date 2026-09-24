@@ -1,14 +1,16 @@
 import { Check } from "lucide-react";
-import { TradeMap } from "~/components/map/trade-map";
+import { TradeGlobe } from "~/components/globe/trade-globe";
 import { ButtonLink } from "~/components/ui/button";
 import { Eyebrow } from "~/components/ui/eyebrow";
 import { pagePath } from "~/config/paths";
 import type { Dictionary } from "~/i18n/dictionaries/en";
 import { useLocaleContext } from "~/i18n/use-locale";
+import { cn } from "~/lib/utils";
 
-type HomeHeroProps = { content: Dictionary["pages"]["home"]["hero"] };
+type HomeContent = Dictionary["pages"]["home"];
+type HomeHeroProps = { content: HomeContent["hero"]; stats: HomeContent["stats"] };
 
-export function HomeHero({ content }: HomeHeroProps) {
+export function HomeHero({ content, stats }: HomeHeroProps) {
   const { locale, common } = useLocaleContext();
 
   return (
@@ -39,7 +41,7 @@ export function HomeHero({ content }: HomeHeroProps) {
               {content.text}
             </p>
             <div className="flex animate-rise flex-wrap gap-3 [animation-delay:340ms]">
-              <ButtonLink to={pagePath(locale, "contact")} variant="gold" size="lg" arrow>
+              <ButtonLink to={pagePath(locale, "contact")} variant="gold" size="lg" arrow magnetic>
                 {common.cta.requestQuote}
               </ButtonLink>
               <ButtonLink to={pagePath(locale, "products")} variant="outline-light" size="lg">
@@ -58,17 +60,34 @@ export function HomeHero({ content }: HomeHeroProps) {
             </ul>
           </div>
 
-          <figure className="relative animate-fade text-ink-400/80 [animation-delay:200ms] lg:col-span-6 lg:-me-10 xl:-me-20">
+          <figure className="relative mx-auto w-full max-w-[36rem] animate-fade [animation-delay:200ms] lg:col-span-6 lg:max-w-none xl:ps-6">
             <div
-              className="absolute inset-0 -z-10 rounded-full bg-radial from-ink-600/25 to-70% to-transparent"
               aria-hidden="true"
+              className="absolute inset-[8%] -z-10 rounded-full bg-radial from-gold-500/15 via-ink-600/20 to-70% to-transparent blur-2xl"
             />
-            <TradeMap label={content.mapCaption} />
-            <figcaption className="mt-4 flex items-center justify-center gap-5 text-ink-300 text-xs">
-              <span className="flex items-center gap-2">
-                <span aria-hidden="true" className="size-2 rounded-full bg-gold-400" />
-                {content.mapCaption}
-              </span>
+            <TradeGlobe label={content.mapCaption} />
+
+            {stats.slice(0, 2).map((stat, index) => (
+              <div
+                key={stat.label}
+                aria-hidden="true"
+                className={cn(
+                  "absolute hidden animate-float items-center gap-3 rounded-2xl border border-white/10 bg-ink-900/55 px-4 py-3 shadow-[0_24px_60px_-24px_rgb(0_0_0/0.8)] backdrop-blur-md sm:flex",
+                  index === 0 ? "start-0 top-[12%]" : "end-0 bottom-[16%] [animation-delay:-3s]",
+                )}
+              >
+                <span className="ltr-nums font-display font-semibold text-3xl text-gold-gradient leading-none">
+                  {stat.value}
+                </span>
+                <span className="max-w-[7.5rem] text-ink-200 text-xs leading-snug">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+
+            <figcaption className="mt-2 flex items-center justify-center gap-2 text-ink-300 text-xs">
+              <span aria-hidden="true" className="size-2 rounded-full bg-gold-400" />
+              {content.mapCaption}
             </figcaption>
           </figure>
         </div>

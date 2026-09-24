@@ -26,6 +26,7 @@ export function Footer() {
       <div className="container-page relative grid gap-14 pt-20 pb-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
           <Link
+            viewTransition
             to={pagePath(locale, "home")}
             aria-label={common.nav.home}
             className="inline-block text-white"
@@ -44,7 +45,7 @@ export function Footer() {
           <ul className="mt-5 flex flex-col gap-3">
             {NAV_PAGES.filter((p) => p !== "products").map((page) => (
               <li key={page}>
-                <Link to={pagePath(locale, page)} className={linkClass}>
+                <Link viewTransition to={pagePath(locale, page)} className={linkClass}>
                   {common.nav[page]}
                 </Link>
               </li>
@@ -59,7 +60,7 @@ export function Footer() {
           <ul className="mt-5 flex flex-col gap-3">
             {productNav.map((product) => (
               <li key={product.slug}>
-                <Link to={productPath(locale, product.slug)} className={linkClass}>
+                <Link viewTransition to={productPath(locale, product.slug)} className={linkClass}>
                   {product.name}
                 </Link>
               </li>
@@ -112,6 +113,15 @@ export function Footer() {
             ) : null}
           </address>
         </div>
+      </div>
+
+      {/* Oversized outlined wordmark — fills with gold on hover, rises in on scroll. */}
+      <div aria-hidden="true" className="container-page relative select-none overflow-hidden">
+        <p className="rise-on-view group/wordmark translate-y-[14%] text-center font-display font-semibold text-[clamp(4.5rem,17vw,16rem)] leading-[0.82] tracking-[0.06em]">
+          <span className="bg-[length:100%_0%] bg-bottom bg-linear-to-t from-gold-500 to-gold-200 bg-clip-text bg-no-repeat text-transparent transition-[background-size] duration-[1.2s] ease-out-expo [-webkit-text-stroke:1px_rgb(230_191_110/0.3)] group-hover/wordmark:bg-[length:100%_100%]">
+            VELTRON
+          </span>
+        </p>
       </div>
 
       <div className="relative border-white/[0.08] border-t">

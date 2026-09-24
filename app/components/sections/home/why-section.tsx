@@ -1,4 +1,5 @@
 import { FileCheck2, type LucideIcon, Network, ShieldCheck, Ship } from "lucide-react";
+import { SpotlightGroup } from "~/components/motion/spotlight-group";
 import { Picture } from "~/components/ui/picture";
 import { Reveal } from "~/components/ui/reveal";
 import { SectionHeading } from "~/components/ui/section-heading";
@@ -34,7 +35,7 @@ export function WhySection({ content }: { content: WhyContent }) {
           </div>
         </div>
 
-        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+        <SpotlightGroup as="ul" className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
           {entries.map(([key, item], index) => {
             const Icon = ICONS[key];
             return (
@@ -42,7 +43,7 @@ export function WhySection({ content }: { content: WhyContent }) {
                 as="li"
                 key={key}
                 delay={index * 0.08}
-                className="group relative flex flex-col gap-5 overflow-hidden rounded-[1.5rem] border border-line bg-white p-8 transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgb(15_23_25/0.3)]"
+                className="spotlight group flex flex-col gap-5 overflow-hidden rounded-[1.5rem] border border-line bg-white p-8 transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgb(15_23_25/0.3)]"
               >
                 <span className="grid size-14 place-items-center rounded-2xl bg-ink-900 text-gold-300 transition-colors duration-500 group-hover:bg-gold-500 group-hover:text-ink-950">
                   <Icon aria-hidden="true" className="size-6" strokeWidth={1.6} />
@@ -58,7 +59,7 @@ export function WhySection({ content }: { content: WhyContent }) {
               </Reveal>
             );
           })}
-        </ul>
+        </SpotlightGroup>
       </div>
     </section>
   );

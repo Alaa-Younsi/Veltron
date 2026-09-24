@@ -1,3 +1,4 @@
+import { CountUp } from "~/components/motion/count-up";
 import { Reveal } from "~/components/ui/reveal";
 
 type Stat = { value: string; label: string };
@@ -16,7 +17,7 @@ export function StatsBand({ stats }: { stats: Stat[] }) {
               {stat.label}
             </dt>
             <dd className="ltr-nums order-1 self-start font-display font-semibold text-5xl text-gold-gradient leading-none sm:text-6xl">
-              {stat.value}
+              <CountUp value={stat.value} />
             </dd>
           </Reveal>
         ))}

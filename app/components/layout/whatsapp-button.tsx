@@ -16,7 +16,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={common.whatsapp.label}
-      className="group fixed right-5 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 flex animate-rise items-center [animation-delay:1.2s] sm:right-7 sm:bottom-7"
+      className="group fixed right-5 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 flex animate-rise items-center [animation-delay:1.2s] [view-transition-name:whatsapp] sm:right-7 sm:bottom-7"
     >
       <span
         aria-hidden="true"

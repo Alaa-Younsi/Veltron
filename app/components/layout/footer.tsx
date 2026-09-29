@@ -129,6 +129,17 @@ export function Footer() {
             © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {SITE.legalName}.{" "}
             {common.footer.rights} · {common.footer.registered}
           </p>
+          <p>
+            {common.footer.developedBy}{" "}
+            <a
+              href="https://alaayounsi.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              className="text-ink-300 underline-offset-4 transition-colors hover:text-gold-300 hover:underline"
+            >
+              Alaa Younsi
+            </a>
+          </p>
           <a
             href="#top"
             className="inline-flex items-center gap-2 transition-colors hover:text-gold-300"

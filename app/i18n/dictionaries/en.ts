@@ -39,6 +39,7 @@ export const en = {
       rights: "All rights reserved.",
       backToTop: "Back to top",
       registered: "Registered in Hong Kong SAR",
+      developedBy: "Website Developer by",
     },
     cta: {
       requestQuote: "Request a quote",

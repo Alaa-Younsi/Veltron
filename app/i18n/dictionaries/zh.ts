@@ -34,6 +34,7 @@ export const zh: Dictionary = {
       rights: "版权所有。",
       backToTop: "返回顶部",
       registered: "于中国香港特别行政区注册",
+      developedBy: "网站开发：",
     },
     cta: {
       requestQuote: "获取报价",

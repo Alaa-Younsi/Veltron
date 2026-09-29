@@ -34,6 +34,7 @@ export const fr: Dictionary = {
       rights: "Tous droits réservés.",
       backToTop: "Retour en haut",
       registered: "Société enregistrée à Hong Kong (RAS)",
+      developedBy: "Site web développé par",
     },
     cta: {
       requestQuote: "Demander un devis",

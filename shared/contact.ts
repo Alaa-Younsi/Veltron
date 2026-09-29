@@ -90,8 +90,12 @@ export const inquiryRequestSchema = inquiryFieldsSchema.extend({
   locale: z.enum(LOCALES),
   /** Honeypot — hidden from humans, must stay empty. */
   website: z.string().max(200).optional().default(""),
-  /** Epoch ms when the form was first rendered (bot-speed heuristic). */
-  startedAt: z.number().int().nonnegative(),
+  /**
+   * How long the form was open before submitting, in ms (bot-speed heuristic).
+   * Measured in the browser with a monotonic clock and sent as a duration, so
+   * a visitor's wrong system clock can never make a real inquiry look like a bot.
+   */
+  fillMs: z.number().int().nonnegative(),
   /** Cloudflare Turnstile response token. */
   turnstileToken: z.string().max(4096).optional().default(""),
 });

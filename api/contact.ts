@@ -20,7 +20,6 @@ import { verifyTurnstile } from "./_lib/turnstile.js";
 const MAX_BODY_BYTES = 16 * 1024;
 /** Humans need more than a few seconds to fill in this form. */
 const MIN_FILL_MS = 3_000;
-const MAX_FORM_AGE_MS = 24 * 60 * 60 * 1000;
 
 export async function POST(request: Request): Promise<Response> {
   const env = getServerEnv();
@@ -54,20 +53,19 @@ export async function POST(request: Request): Promise<Response> {
         fields[key] = isFieldErrorCode(issue.message) ? issue.message : "invalidOption";
       }
     }
-    // Errors only in metadata (locale, startedAt…) mean a tampered/malformed request.
+    // Errors only in metadata (locale, fillMs…) mean a tampered/malformed request.
     if (Object.keys(fields).length === 0) return json({ ok: false, error: "bad_request" }, 400);
     return json({ ok: false, error: "validation", fields }, 422);
   }
 
-  const { website, startedAt, turnstileToken, locale, ...fields } = parsed.data;
+  const { website, fillMs, turnstileToken, locale, ...fields } = parsed.data;
 
   // Bot heuristics: respond with success so automated senders learn nothing.
-  const elapsed = Date.now() - startedAt;
-  if (website.length > 0 || elapsed < MIN_FILL_MS || elapsed > MAX_FORM_AGE_MS) {
+  if (website.length > 0 || fillMs < MIN_FILL_MS) {
     console.info("[contact] dropped by spam heuristics", {
       ip,
       honeypot: website.length > 0,
-      elapsed,
+      fillMs,
     });
     return json({ ok: true }, 200);
   }

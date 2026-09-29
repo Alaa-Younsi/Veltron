@@ -69,9 +69,10 @@ export function InquiryForm({ locale, copy }: InquiryFormProps) {
     },
   });
 
-  // Timestamp for the server's bot-speed heuristic (set after hydration, not at build time).
+  // Start of the fill-time measurement for the server's bot-speed heuristic
+  // (set after hydration, not at build time; monotonic, unaffected by the system clock).
   useEffect(() => {
-    startedAt.current = Date.now();
+    startedAt.current = performance.now();
   }, []);
 
   // Pre-select the product when arriving from a product page (?product=cement).
@@ -104,7 +105,7 @@ export function InquiryForm({ locale, copy }: InquiryFormProps) {
           ...values,
           locale,
           website: honeypotRef.current?.value ?? "",
-          startedAt: startedAt.current,
+          fillMs: Math.round(performance.now() - startedAt.current),
           turnstileToken: token,
         }),
       });

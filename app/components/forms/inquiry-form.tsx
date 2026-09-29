@@ -151,7 +151,13 @@ export function InquiryForm({ locale, copy }: InquiryFormProps) {
         <CheckCircle2 aria-hidden="true" className="size-10 text-emerald-700" strokeWidth={1.6} />
         <h3 className="font-semibold text-2xl text-ink-900 tracking-tight">{copy.success.title}</h3>
         <p className="max-w-lg text-ink-600 leading-relaxed">{copy.success.text}</p>
-        <Button variant="outline" onClick={() => setStatus("idle")}>
+        <Button
+          variant="outline"
+          onClick={() => {
+            startedAt.current = performance.now();
+            setStatus("idle");
+          }}
+        >
           {copy.success.again}
         </Button>
       </div>

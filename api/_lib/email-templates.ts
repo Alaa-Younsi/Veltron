@@ -6,7 +6,7 @@
 import { INQUIRY_PRODUCT_LABELS } from "../../shared/catalog.js";
 import type { InquiryFields } from "../../shared/contact.js";
 import type { Locale } from "../../shared/locales.js";
-import { SITE_DOMAIN, SITE_ORIGIN } from "../../shared/site.js";
+import { CONTACT_EMAIL, SITE_DOMAIN, SITE_ORIGIN } from "../../shared/site.js";
 
 const BRAND = {
   ink: "#2B3A3D",
@@ -192,7 +192,7 @@ export function autoReplyEmail(params: { name: string; locale: Locale; reference
 ${copy.lines.map((l) => `<p style="margin:0 0 14px;font-size:15px;line-height:1.7;">${escapeHtml(l)}</p>`).join("")}
 <p style="margin:22px 0;font-size:13px;color:${BRAND.muted};">${escapeHtml(copy.ref)}: <strong style="color:${BRAND.ink};">${escapeHtml(params.reference)}</strong></p>
 <p style="margin:0;font-size:15px;line-height:1.7;">${copy.signoff}</p>`;
-  const footer = `VELTRON GLOBAL TRADING LIMITED<br>Flat 2401-16, 24/F, Wing Shing Industrial Building, 26 Ng Fong Street, San Po Kong, Hong Kong<br><a href="${SITE_ORIGIN}" style="color:${BRAND.gold};text-decoration:none;">${SITE_DOMAIN}</a>`;
+  const footer = `VELTRON GLOBAL TRADING LIMITED<br>Flat 2401-16, 24/F, Wing Shing Industrial Building, 26 Ng Fong Street, San Po Kong, Hong Kong<br><a href="mailto:${CONTACT_EMAIL}" style="color:${BRAND.gold};text-decoration:none;">${CONTACT_EMAIL}</a> · <a href="${SITE_ORIGIN}" style="color:${BRAND.gold};text-decoration:none;">${SITE_DOMAIN}</a>`;
   const text = [
     copy.greeting(params.name),
     "",

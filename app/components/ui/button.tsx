@@ -77,7 +77,7 @@ export function ButtonLink({
       )}
       {...props}
     >
-      <Content arrow={arrow}>{children as ReactNode}</Content>
+      <Content arrow={arrow}>{children}</Content>
     </Link>
   );
 }

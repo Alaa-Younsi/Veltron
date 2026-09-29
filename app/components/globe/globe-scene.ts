@@ -256,6 +256,7 @@ export async function createTradeGlobe(canvas: HTMLCanvasElement, options: Globe
   const markerGeo = new SphereGeometry(1, 12, 12);
   disposables.push(markerGeo);
 
+  let hubRing: Mesh<RingGeometry, MeshBasicMaterial> | null = null;
   if (hub) {
     points
       .filter((p) => p.kind !== "hub")
@@ -295,7 +296,7 @@ export async function createTradeGlobe(canvas: HTMLCanvasElement, options: Globe
     ring.lookAt(hubPos.clone().multiplyScalar(2));
     globe.add(ring);
     disposables.push(ringGeo, ringMat);
-    globe.userData.ring = ring;
+    hubRing = ring;
   }
 
   // Initial orientation: centre on the Indian Ocean trade corridor, tilted north.
@@ -384,11 +385,10 @@ export async function createTradeGlobe(canvas: HTMLCanvasElement, options: Globe
           : Math.min(1, Math.max(0, (elapsed - 0.3 - i * 0.05) / 1.6));
     });
 
-    const ring = globe.userData.ring as Mesh | undefined;
-    if (ring && !reducedMotion) {
+    if (hubRing && !reducedMotion) {
       const p = (elapsed % 2.4) / 2.4;
-      ring.scale.setScalar(1 + p * 2.2);
-      (ring.material as MeshBasicMaterial).opacity = 1 - p;
+      hubRing.scale.setScalar(1 + p * 2.2);
+      hubRing.material.opacity = 1 - p;
     }
 
     renderer.render(scene, camera);

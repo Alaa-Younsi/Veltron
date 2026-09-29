@@ -7,3 +7,6 @@
  */
 export const SITE_DOMAIN = "veltrontrading.com";
 export const SITE_ORIGIN = `https://${SITE_DOMAIN}`;
+
+/** Public business email shown on the website and in visitor confirmations. */
+export const CONTACT_EMAIL = `contact@${SITE_DOMAIN}`;

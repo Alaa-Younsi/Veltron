@@ -4,8 +4,7 @@ import { Link, NavLink } from "react-router";
 import { Logo } from "~/components/brand/logo";
 import { ButtonLink } from "~/components/ui/button";
 import { pagePath } from "~/config/paths";
-import { useHideOnScroll } from "~/hooks/use-hide-on-scroll";
-import { useScrolled } from "~/hooks/use-scrolled";
+import { useScrollState } from "~/hooks/use-scroll-state";
 import { useLocaleContext } from "~/i18n/use-locale";
 import { cn } from "~/lib/utils";
 import { LanguageSwitcher } from "./language-switcher";
@@ -16,10 +15,8 @@ import { ProductsMenu } from "./products-menu";
 
 export function Header() {
   const { locale, common, productNav } = useLocaleContext();
-  const scrolled = useScrolled(24);
+  const { scrolled: solid, hidden } = useScrollState();
   const [menuOpen, setMenuOpen] = useState(false);
-  const hidden = useHideOnScroll();
-  const solid = scrolled;
   const tone = solid ? "dark" : "light";
 
   return (

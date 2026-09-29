@@ -1,5 +1,5 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useCallback, useId, useRef, useState } from "react";
+import { type PointerEvent, useCallback, useId, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { pagePath, productPath } from "~/config/paths";
 import { useDismiss } from "~/hooks/use-dismiss";
@@ -22,12 +22,38 @@ export function ProductsMenu({ locale, common, productNav, tone }: ProductsMenuP
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const panelId = useId();
-  const close = useCallback(() => setOpen(false), []);
+  // Set when a mouse hover opened the panel, so the click that usually follows
+  // on the chevron keeps it open instead of toggling it straight back closed.
+  const openedByHover = useRef(false);
+  const close = useCallback(() => {
+    openedByHover.current = false;
+    setOpen(false);
+  }, []);
   useDismiss(ref, open, close);
 
+  const onPointerEnter = (event: PointerEvent) => {
+    if (event.pointerType !== "mouse" || open) return;
+    openedByHover.current = true;
+    setOpen(true);
+  };
+  const onPointerLeave = (event: PointerEvent) => {
+    if (event.pointerType === "mouse") close();
+  };
+  const onToggle = () => {
+    if (openedByHover.current) {
+      openedByHover.current = false;
+      return;
+    }
+    setOpen((v) => !v);
+  };
+
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: hover-to-open is a pointer-only enhancement; keyboard users use the disclosure button
-    <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={close}>
+    <div
+      ref={ref}
+      className="relative"
+      onPointerEnter={onPointerEnter}
+      onPointerLeave={onPointerLeave}
+    >
       <div className="flex items-center">
         <NavLink
           viewTransition
@@ -42,7 +68,7 @@ export function ProductsMenu({ locale, common, productNav, tone }: ProductsMenuP
           aria-expanded={open}
           aria-controls={panelId}
           aria-label={common.nav.allProducts}
-          onClick={() => setOpen((v) => !v)}
+          onClick={onToggle}
           className={cn(
             "grid size-7 place-items-center rounded-full transition-colors",
             tone === "light" ? "text-white/70 hover:text-white" : "text-ink-500 hover:text-ink-900",

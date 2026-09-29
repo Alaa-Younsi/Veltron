@@ -13,9 +13,9 @@ export type RegionId =
   | "americas"
   | "oceania";
 
-export type GeoPointKind = "hub" | "origin" | "destination";
+type GeoPointKind = "hub" | "origin" | "destination";
 
-export type GeoPoint = {
+type GeoPoint = {
   readonly id: string;
   readonly name: string;
   readonly coords: readonly [number, number];

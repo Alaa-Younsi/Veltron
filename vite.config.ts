@@ -6,6 +6,11 @@ import { vercelApiDev } from "./tooling/vercel-api-dev.ts";
 
 export default defineConfig(({ command }) => ({
   plugins: [tailwindcss(), reactRouter(), vercelApiDev()],
+  build: {
+    // The only chunk above Vite's 500 kB default is the three.js globe, which is
+    // code-split and fetched after the visitor's first interaction.
+    chunkSizeWarningLimit: 600,
+  },
   define: {
     // Canonical origin baked into every pre-rendered page. Production builds always
     // use the official domain (shared/site.ts) — no environment variable can leak

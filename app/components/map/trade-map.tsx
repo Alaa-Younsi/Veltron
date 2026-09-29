@@ -1,6 +1,6 @@
 import { m } from "motion/react";
 import { useId } from "react";
-import { GEO_POINTS, type GeoPoint, type RegionId } from "~/content/geo";
+import { GEO_POINTS, type GeoPointId, type RegionId } from "~/content/geo";
 import { cn } from "~/lib/utils";
 import { PROJECTED_POINTS, WORLD_MAP } from "./world-map.generated";
 
@@ -14,17 +14,19 @@ type TradeMapProps = {
   showLabels?: boolean;
 };
 
-const HUB_ID = "hkg" satisfies GeoPoint["id"];
-const ORIGINS: readonly GeoPoint[] = GEO_POINTS.filter((p) => p.kind === "origin");
-const DESTINATIONS: readonly GeoPoint[] = GEO_POINTS.filter((p) => p.kind === "destination");
+type Entry = (typeof GEO_POINTS)[number];
+const byKind = <K extends Entry["kind"]>(kind: K) =>
+  GEO_POINTS.filter((p): p is Extract<Entry, { kind: K }> => p.kind === kind);
+
+const HUB_ID: GeoPointId = "hkg";
+const ORIGINS = byKind("origin");
+const DESTINATIONS = byKind("destination");
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function point(id: string) {
-  return PROJECTED_POINTS[id as keyof typeof PROJECTED_POINTS];
-}
+const point = (id: GeoPointId) => PROJECTED_POINTS[id];
 
 /** Quadratic arc between two projected points, bowed "upwards" for a flight-path feel. */
-function arc(fromId: string, toId: string): string {
+function arc(fromId: GeoPointId, toId: GeoPointId): string {
   const a = point(fromId);
   const b = point(toId);
   const mx = (a.x + b.x) / 2;

@@ -1,13 +1,14 @@
 /**
  * Company & site-wide constants. Public information only — never secrets.
  */
+import { CONTACT_EMAIL } from "~shared/site";
 
 /**
  * Optional public contact details. Leave empty to hide them from the site —
  * inquiries are always delivered via the contact form (see CONTACT_TO_EMAIL).
  */
 const PUBLIC_CONTACT: { email: string; phone: string; whatsapp: string } = {
-  email: "",
+  email: CONTACT_EMAIL,
   phone: "",
   whatsapp: "+213 550 68 40 00",
 };

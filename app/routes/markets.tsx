@@ -78,9 +78,10 @@ export default function Markets({ loaderData }: Route.ComponentProps) {
                     <button
                       type="button"
                       aria-pressed={selected}
-                      onClick={() => setActive(selected ? null : id)}
-                      onMouseEnter={() => setActive(id)}
-                      onMouseLeave={() => setActive(null)}
+                      // Focus/tap already selects, so click selects rather than toggles.
+                      onClick={() => setActive(id)}
+                      onPointerEnter={(e) => e.pointerType === "mouse" && setActive(id)}
+                      onPointerLeave={(e) => e.pointerType === "mouse" && setActive(null)}
                       onFocus={() => setActive(id)}
                       onBlur={() => setActive(null)}
                       className={cn(

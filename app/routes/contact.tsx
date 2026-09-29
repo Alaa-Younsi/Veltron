@@ -49,7 +49,7 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
       />
 
       <section className="container-page grid gap-10 py-20 sm:py-28 lg:grid-cols-12 lg:gap-12">
-        <Reveal className="rounded-[2rem] border border-line bg-white p-6 shadow-[0_40px_80px_-50px_rgb(15_23_25/0.35)] sm:p-10 lg:col-span-7">
+        <Reveal className="rounded-[2rem] border border-line bg-white p-6 shadow-[0_40px_80px_-50px_rgb(15_23_25/0.35)] sm:p-10 lg:col-span-7 lg:self-start">
           <h2 className="font-semibold text-3xl tracking-tight">{page.formTitle}</h2>
           <p className="mt-3 mb-10 text-ink-500">{page.formText}</p>
           <InquiryForm locale={locale} copy={form} />

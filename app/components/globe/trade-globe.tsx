@@ -14,7 +14,10 @@ const GLOBE_POINTS: GlobePoint[] = GEO_POINTS.map((p) => ({
 function supportsWebGL(): boolean {
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl2") ?? canvas.getContext("webgl"));
+    const gl = canvas.getContext("webgl2") ?? canvas.getContext("webgl");
+    // Release the probe context immediately — browsers cap live WebGL contexts.
+    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    return gl !== null;
   } catch {
     return false;
   }
@@ -75,6 +78,9 @@ type TradeGlobeProps = { label: string; className?: string };
 export function TradeGlobe({ label, className }: TradeGlobeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ready, setReady] = useState(false);
+  // Once the globe has faded in, drop the SVG fallback so its infinite route
+  // animations stop costing style/paint work behind the canvas.
+  const [fallbackGone, setFallbackGone] = useState(false);
   const reducedMotion = useReducedMotion() ?? false;
 
   useEffect(() => {
@@ -111,15 +117,20 @@ export function TradeGlobe({ label, className }: TradeGlobeProps) {
 
   return (
     <div role="img" aria-label={label} className={cn("relative aspect-square w-full", className)}>
-      <div
-        aria-hidden="true"
-        className={cn(
-          "absolute inset-0 flex items-center text-ink-400/80 transition-opacity duration-1000",
-          ready && "opacity-0",
-        )}
-      >
-        <TradeMap label={label} />
-      </div>
+      {fallbackGone ? null : (
+        <div
+          aria-hidden="true"
+          onTransitionEnd={(event) => {
+            if (ready && event.target === event.currentTarget) setFallbackGone(true);
+          }}
+          className={cn(
+            "absolute inset-0 flex items-center text-ink-400/80 transition-opacity duration-1000",
+            ready && "opacity-0",
+          )}
+        >
+          <TradeMap label={label} />
+        </div>
+      )}
       <canvas
         ref={canvasRef}
         className={cn(

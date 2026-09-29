@@ -121,7 +121,9 @@ export function InquiryForm({ locale, copy }: InquiryFormProps) {
           setError(field as keyof InquiryFields, { type: "server", message: code });
         }
       }
-      setFormError(result && !result.ok ? result.error : "server");
+      // The body is untrusted JSON: only show messages we have copy for.
+      const code = result && !result.ok ? result.error : undefined;
+      setFormError(code !== undefined && Object.hasOwn(copy.api, code) ? code : "server");
       setStatus("idle");
     } catch {
       setFormError("network");

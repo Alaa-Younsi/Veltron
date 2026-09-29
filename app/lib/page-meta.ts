@@ -4,8 +4,9 @@ import { breadcrumbJsonLd, buildMeta } from "./seo";
 
 type PageLoaderData = {
   locale: Locale;
-  meta: { titleSuffix: string; siteName: string };
-  page: { title: string; description: string };
+  meta: { siteName: string };
+  /** `crumb` overrides the breadcrumb name when the SEO title is more descriptive. */
+  page: { title: string; description: string; crumb?: string };
   homeLabel: string;
 };
 
@@ -25,13 +26,12 @@ export function innerPageMeta(
     title: page.title,
     description: page.description,
     pathSuffix,
-    titleSuffix: meta.titleSuffix,
     siteName: meta.siteName,
     jsonLd: [
       breadcrumbJsonLd([
         { name: homeLabel, path: `/${locale}` },
         ...trail.map((t) => ({ name: t.name, path: `/${locale}${t.suffix}` })),
-        { name: page.title, path: `/${locale}${pathSuffix}` },
+        { name: page.crumb ?? page.title, path: `/${locale}${pathSuffix}` },
       ]),
     ],
   });

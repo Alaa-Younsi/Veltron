@@ -9,6 +9,8 @@
 
 <p>International trading of cement, clinker, gypsum, construction materials and industrial raw materials — Hong Kong.</p>
 
+<p><a href="https://veltrontrading.com"><strong>veltrontrading.com</strong></a></p>
+
 <p>
   <img alt="React 19" src="https://img.shields.io/badge/React-19-0f1719?style=flat-square&logo=react&logoColor=61DAFB" />
   <img alt="React Router 8" src="https://img.shields.io/badge/React_Router-8-0f1719?style=flat-square&logo=reactrouter&logoColor=F44250" />
@@ -102,7 +104,7 @@ A multilingual, fully pre-rendered corporate website with a serverless inquiry b
 | Styling | Tailwind CSS 4 · custom design tokens |
 | Motion & 3D | Motion · three.js (WebGL) · Lenis · CSS scroll-driven animations |
 | Forms & validation | react-hook-form · zod |
-| Backend | Vercel Functions (Node.js 22) |
+| Backend | Vercel Functions (Node.js 24) |
 | Email | Resend |
 | Security | Cloudflare Turnstile · Upstash Redis rate limiting · strict CSP |
 | Asset pipeline | sharp · opentype.js · d3-geo · topojson |
@@ -125,7 +127,7 @@ scripts/              Asset pipelines (brand, images, maps) and build verificati
 
 ## Getting Started
 
-**Prerequisites:** [Bun](https://bun.sh) 1.3+ · Node.js 22
+**Prerequisites:** [Bun](https://bun.sh) 1.3+ · Node.js 24
 
 ```bash
 bun install
@@ -146,10 +148,9 @@ bun run dev            # http://localhost:5173 — site and API
 | --- | --- | --- |
 | `RESEND_API_KEY` | ✅ | Resend API key |
 | `CONTACT_TO_EMAIL` | ✅ | Inbox that receives inquiries (comma-separated for several) |
-| `CONTACT_FROM_EMAIL` | ✅ | Verified sender, e.g. `VELTRON Website <website@domain.com>` |
+| `CONTACT_FROM_EMAIL` | ✅ | Verified sender, e.g. `VELTRON Website <website@veltrontrading.com>` |
 | `TURNSTILE_SECRET_KEY` | ✅ | Cloudflare Turnstile secret key |
 | `VITE_TURNSTILE_SITE_KEY` | ✅ | Cloudflare Turnstile site key (build-time) |
-| `VITE_SITE_URL` | Recommended | Canonical site origin |
 | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Recommended | Global rate limiting |
 | `CONTACT_AUTOREPLY` | Optional | `true` to send visitors a localised confirmation |
 

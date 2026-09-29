@@ -4,7 +4,6 @@ import type { Dictionary } from "./en";
 export const zh: Dictionary = {
   meta: {
     siteName: "VELTRON 环球贸易",
-    titleSuffix: "VELTRON Global Trading Limited",
     defaultDescription:
       "总部位于香港的国际贸易公司，经营水泥、熟料、石膏、建筑材料及工业原材料，提供全球采购与端到端物流协调服务。",
   },
@@ -368,6 +367,7 @@ export const zh: Dictionary = {
         quoteTitle: "获取{product}报价",
         quoteText: "请告知等级、数量、目的港及首选贸易术语，我们将为您提供量身定制的报价。",
         backToProducts: "全部产品",
+        metaTitle: "{product}供应与贸易",
       },
     },
 

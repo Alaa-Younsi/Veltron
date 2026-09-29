@@ -8,7 +8,6 @@
 export const en = {
   meta: {
     siteName: "VELTRON Global Trading",
-    titleSuffix: "VELTRON Global Trading Limited",
     defaultDescription:
       "Hong Kong–based international trader of cement, clinker, gypsum, construction materials and industrial raw materials — with global sourcing and end-to-end shipping coordination.",
   },
@@ -312,7 +311,7 @@ export const en = {
 
   pages: {
     home: {
-      title: "International Trading of Cement & Construction Materials",
+      title: "Cement & Construction Materials Trading",
       description:
         "VELTRON Global Trading Limited supplies cement, clinker, gypsum, construction materials and industrial raw materials worldwide from its base in Hong Kong.",
       hero: {
@@ -485,6 +484,7 @@ export const en = {
         quoteText:
           "Tell us the grade, quantity, destination port and preferred Incoterm — we will respond with a tailored offer.",
         backToProducts: "All products",
+        metaTitle: "{product} Supplier",
       },
     },
 

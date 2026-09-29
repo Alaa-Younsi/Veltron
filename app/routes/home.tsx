@@ -27,7 +27,6 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
     title: page.title,
     description: page.description,
     pathSuffix: "",
-    titleSuffix: meta.titleSuffix,
     siteName: meta.siteName,
     isHome: true,
     jsonLd: [

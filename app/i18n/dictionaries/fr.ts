@@ -3,7 +3,6 @@ import type { Dictionary } from "./en";
 export const fr: Dictionary = {
   meta: {
     siteName: "VELTRON Global Trading",
-    titleSuffix: "VELTRON Global Trading Limited",
     defaultDescription:
       "Négociant international basé à Hong Kong : ciment, clinker, gypse, matériaux de construction et matières premières industrielles, avec sourcing mondial et coordination logistique de bout en bout.",
   },
@@ -327,7 +326,7 @@ export const fr: Dictionary = {
 
   pages: {
     home: {
-      title: "Négoce international de ciment et de matériaux de construction",
+      title: "Négoce de ciment et de matériaux de construction",
       description:
         "VELTRON Global Trading Limited fournit du ciment, du clinker, du gypse, des matériaux de construction et des matières premières industrielles dans le monde entier depuis Hong Kong.",
       hero: {
@@ -500,6 +499,7 @@ export const fr: Dictionary = {
         quoteText:
           "Indiquez la qualité, la quantité, le port de destination et l’Incoterm souhaité — nous vous répondrons avec une offre sur mesure.",
         backToProducts: "Tous les produits",
+        metaTitle: "{product} — Fournisseur",
       },
     },
 

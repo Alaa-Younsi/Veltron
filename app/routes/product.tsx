@@ -34,8 +34,10 @@ export async function loader({ params }: Route.LoaderArgs) {
     requestQuote: dict.common.cta.requestQuote,
     product,
     page: {
-      title: product.name,
-      description: `${product.short} ${product.intro[0] ?? ""}`.slice(0, 300),
+      title: interpolate(dict.pages.products.detail.metaTitle, { product: product.name }),
+      crumb: product.name,
+      // CJK sentences are joined without a space.
+      description: [product.short, product.intro[0] ?? ""].join(locale === "zh" ? "" : " "),
     },
     related: PRODUCT_SLUGS.filter((s) => s !== slug)
       .slice(0, 3)
